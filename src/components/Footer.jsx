@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { nav } from '../data/nav'
+import Icon from './Icon'
+import { SOCIALS } from '../i18n/translations'
 import { useLang } from '../i18n/useLang'
 
 export default function Footer() {
@@ -28,13 +30,18 @@ export default function Footer() {
             {t.footer.tagline}
           </p>
           <div className="mt-5 flex gap-3">
-            {['LinkedIn', 'Facebook', 'X'].map((s) => (
-              <span
-                key={s}
-                className="rounded-full border border-white/15 px-3 py-1 text-xs text-gray-400"
+            {SOCIALS.map((s) => (
+              <a
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                title={s.name}
+                aria-label={s.name}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-gray-400 transition-colors hover:border-pa-green hover:bg-pa-green hover:text-white"
               >
-                {s}
-              </span>
+                <Icon name={s.icon} className="h-4 w-4" />
+              </a>
             ))}
           </div>
         </div>
