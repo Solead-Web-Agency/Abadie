@@ -2,8 +2,8 @@
 // Structure is identical across `fr` and `en` so components can read t.<path> safely.
 
 export const CONTACT_EMAIL = 'pierre@abadie.bf'
-export const CONTACT_PHONE = '+226 25 33 23 25'
-export const CONTACT_PHONE_HREF = '+22625332325'
+export const CONTACT_PHONE = '07 51 51 51'
+export const CONTACT_PHONE_HREF = '+22607515151'
 export const CONTACT_ADDRESS = '143 rue 4.107, Ouagadougou'
 
 export const SOCIALS = [
@@ -210,10 +210,49 @@ export const messages = {
     actualites: {
       subtitle: 'Les dernières informations et analyses de nos experts.',
       readMore: 'Lire la suite',
+      back: 'Retour aux actualités',
+      publishedOn: 'Publié le',
+      moreTitle: 'Autres actualités',
       posts: [
-        { tag: 'Fiscalité', date: '12 février 2024', title: 'Loi de finances : les principales mesures pour les entreprises', excerpt: "Tour d'horizon des nouveautés fiscales applicables aux sociétés implantées au Burkina Faso et leurs impacts pratiques." },
-        { tag: 'Droit social', date: '28 janvier 2024', title: 'Réglementation du travail : ce qui change cette année', excerpt: 'Les évolutions récentes du droit du travail et les bonnes pratiques pour rester en conformité.' },
-        { tag: 'Cabinet', date: '9 janvier 2024', title: 'Le Cabinet Pierre Abadie renforce son équipe pluridisciplinaire', excerpt: "De nouveaux collaborateurs rejoignent nos départements d'expertise comptable et de conseil juridique." },
+        {
+          slug: 'loi-de-finances-mesures-entreprises',
+          tag: 'Fiscalité',
+          date: '12 février 2024',
+          title: 'Loi de finances : les principales mesures pour les entreprises',
+          excerpt: "Tour d'horizon des nouveautés fiscales applicables aux sociétés implantées au Burkina Faso et leurs impacts pratiques.",
+          body: [
+            "Chaque loi de finances redessine une partie du paysage fiscal des entreprises implantées au Burkina Faso. Au-delà des taux, ce sont souvent les obligations déclaratives et les modalités de contrôle qui emportent les conséquences pratiques les plus lourdes pour les directions financières.",
+            "Nos équipes retiennent trois axes de vigilance : le traitement des charges déductibles et leur justification, les retenues à la source sur les prestations rendues par des non-résidents, et le calendrier des acomptes qui conditionne le calcul des pénalités en cas de retard.",
+            "Pour les groupes internationaux, la documentation des prix de transfert et son articulation avec les conventions fiscales signées par le Burkina Faso restent le premier poste de risque lors d'une vérification de comptabilité.",
+            "Le Cabinet Pierre Abadie accompagne ses clients dans la lecture de ces mesures, la mise à jour de leurs procédures internes et la sécurisation de leurs positions fiscales. Nos analyses détaillées sont reprises et actualisées dans nos ouvrages de référence.",
+          ],
+        },
+        {
+          slug: 'reglementation-du-travail-ce-qui-change',
+          tag: 'Droit social',
+          date: '28 janvier 2024',
+          title: 'Réglementation du travail : ce qui change cette année',
+          excerpt: 'Les évolutions récentes du droit du travail et les bonnes pratiques pour rester en conformité.',
+          body: [
+            "Le droit du travail burkinabè évolue régulièrement, sous l'effet des textes réglementaires, des conventions collectives sectorielles et de la jurisprudence des tribunaux du travail.",
+            "Les points les plus sensibles concernent la forme et la durée des contrats, la gestion des heures supplémentaires, les déclarations sociales et les procédures de rupture, dont le formalisme est fréquemment source de contentieux.",
+            "Notre recommandation reste la même : auditer périodiquement les contrats et les bulletins de paie, formaliser les procédures disciplinaires et conserver la traçabilité des échanges avec les représentants du personnel.",
+            "Le département droit social du cabinet assiste les employeurs dans ces diligences, de l'audit de conformité à la représentation en cas de litige. Ces sujets sont traités en détail dans notre ouvrage consacré à la réglementation du travail.",
+          ],
+        },
+        {
+          slug: 'cabinet-renforce-equipe-pluridisciplinaire',
+          tag: 'Cabinet',
+          date: '9 janvier 2024',
+          title: 'Le Cabinet Pierre Abadie renforce son équipe pluridisciplinaire',
+          excerpt: "De nouveaux collaborateurs rejoignent nos départements d'expertise comptable et de conseil juridique.",
+          body: [
+            "Le cabinet poursuit le renforcement de ses équipes afin d'accompagner la croissance de ses clients au Burkina Faso et dans la sous-région.",
+            "De nouveaux collaborateurs rejoignent les départements d'expertise comptable, de conseil fiscal et de droit social. Cette organisation pluridisciplinaire permet de traiter un même dossier sous ses angles comptable, fiscal et juridique, sans rupture d'interlocuteur.",
+            "Elle soutient également notre activité de recherche et d'édition, à l'origine des ouvrages et mémentos que le cabinet publie chaque année sur la fiscalité, la réglementation et le droit des affaires.",
+            "Les candidatures spontanées restent les bienvenues : elles sont étudiées tout au long de l'année.",
+          ],
+        },
       ],
     },
     presse: {
@@ -226,14 +265,63 @@ export const messages = {
       theyTalked: 'Ils ont parlé de nous',
     },
     postsPage: {
-      subtitle: 'Conseils, décryptages et actualités courtes de nos experts.',
+      subtitle: 'Les publications du cabinet : nos ouvrages, mémentos et recueils de textes commentés.',
+      intro:
+        "Le Cabinet Pierre Abadie mène une activité d'édition continue sur la fiscalité, la réglementation et le droit des affaires au Burkina Faso. Chaque publication est rédigée par nos équipes, à partir des textes officiels et de notre pratique quotidienne auprès des entreprises.",
+      allBooks: 'Voir tous nos ouvrages',
+      readBook: "Découvrir l'ouvrage",
+      followTitle: 'Suivre les publications du cabinet',
+      followText:
+        'Nos parutions, mises à jour et analyses sont relayées sur nos réseaux sociaux.',
       items: [
-        'Les délais de déclaration fiscale à ne pas manquer ce trimestre.',
-        '5 points de vigilance avant un contrôle fiscal.',
-        'Embauche au Burkina Faso : les formalités essentielles.',
-        'SYSCOHADA : ce que tout dirigeant doit savoir.',
-        'Conventions fiscales : éviter la double imposition.',
-        "Bien préparer la clôture de son exercice comptable.",
+        {
+          img: '4-Memento-Fiscal-BF_Page_1-212x300.jpg',
+          tag: 'Mémento',
+          date: 'Mise à jour annuelle',
+          title: 'Mémento fiscal du Burkina Faso',
+          excerpt:
+            "L'ensemble des impôts et taxes applicables aux entreprises, présenté impôt par impôt, avec les obligations déclaratives et les échéances de paiement.",
+        },
+        {
+          img: '220206-couv-REGL-FISCALE-2022-page-1_Page_1-212x300.jpg',
+          tag: 'Réglementation',
+          date: 'Édition consolidée',
+          title: 'La réglementation fiscale',
+          excerpt:
+            "Le Code général des impôts et ses textes d'application, consolidés et commentés à la lumière de la pratique de l'administration fiscale.",
+        },
+        {
+          img: '180901-Couv-Reglementation-du-Travail_Page_1-212x300.jpg',
+          tag: 'Droit social',
+          date: 'Édition consolidée',
+          title: 'La réglementation du travail',
+          excerpt:
+            'Code du travail, conventions collectives et textes sociaux réunis en un volume, à destination des employeurs et des services des ressources humaines.',
+        },
+        {
+          img: '24-Reglementation-du-secteur-MINIER-BF-en-FR_Page_1-212x300.jpg',
+          tag: 'Secteur minier',
+          date: 'Dernière parution',
+          title: 'La réglementation du secteur minier',
+          excerpt:
+            "Le régime juridique, fiscal et douanier des titres miniers, des sous-traitants et des sociétés d'exploration au Burkina Faso.",
+        },
+        {
+          img: '150422-Couv-Fiscalite-Internationale_Page_1-211x300.jpg',
+          tag: 'Fiscalité internationale',
+          date: 'Ouvrage de référence',
+          title: 'La fiscalité internationale',
+          excerpt:
+            "Conventions fiscales, retenues à la source et prix de transfert : les règles applicables aux flux entre le Burkina Faso et l'étranger.",
+        },
+        {
+          img: 'Couv-Reglementation-douaniere-tome-I_Page_1-204x300.jpg',
+          tag: 'Douane',
+          date: 'Tome I',
+          title: 'La réglementation douanière',
+          excerpt:
+            "Régimes douaniers, valeur en douane et contentieux : un outil de travail pour les importateurs, exportateurs et transitaires.",
+        },
       ],
     },
     rejoindre: {
@@ -261,7 +349,7 @@ export const messages = {
       address: '143 rue 4.107, Ouagadougou, Burkina Faso',
       emailLabel: 'Email',
       phoneLabel: 'Téléphone',
-      phone: '+226 25 33 23 25',
+      phone: CONTACT_PHONE,
       subjects: ['Conseil fiscal', 'Conseil droit social', 'Expertise comptable & audit', 'Recrutement', 'Autre'],
       fName: 'Nom complet',
       fNamePh: 'Votre nom',
@@ -283,7 +371,7 @@ export const messages = {
       cards: [
         { icon: 'pin', title: 'Adresse', lines: ['Cabinet Pierre Abadie', '143 rue 4.107, Ouagadougou, Burkina Faso'] },
         { icon: 'mail', title: 'Email', lines: [CONTACT_EMAIL] },
-        { icon: 'phone', title: 'Téléphone', lines: ['+226 25 33 23 25'] },
+        { icon: 'phone', title: 'Téléphone', lines: [CONTACT_PHONE] },
       ],
       mapTitle: 'Carte Ouagadougou',
     },
@@ -470,10 +558,49 @@ export const messages = {
     actualites: {
       subtitle: 'The latest information and analysis from our experts.',
       readMore: 'Read more',
+      back: 'Back to news',
+      publishedOn: 'Published on',
+      moreTitle: 'More news',
       posts: [
-        { tag: 'Taxation', date: '12 February 2024', title: 'Finance Act: the main measures for businesses', excerpt: 'An overview of the tax changes applicable to companies in Burkina Faso and their practical impact.' },
-        { tag: 'Labour law', date: '28 January 2024', title: 'Labour regulations: what changes this year', excerpt: 'Recent developments in employment law and best practices to stay compliant.' },
-        { tag: 'Firm', date: '9 January 2024', title: 'Cabinet Pierre Abadie strengthens its multidisciplinary team', excerpt: 'New staff join our accounting and legal advisory departments.' },
+        {
+          slug: 'loi-de-finances-mesures-entreprises',
+          tag: 'Taxation',
+          date: '12 February 2024',
+          title: 'Finance Act: the main measures for businesses',
+          excerpt: 'An overview of the tax changes applicable to companies in Burkina Faso and their practical impact.',
+          body: [
+            'Every Finance Act reshapes part of the tax landscape for companies operating in Burkina Faso. Beyond the rates themselves, it is usually the reporting obligations and audit procedures that carry the heaviest practical consequences for finance departments.',
+            'Our teams highlight three areas to watch: the treatment and substantiation of deductible expenses, withholding tax on services rendered by non-residents, and the instalment calendar, which drives the calculation of penalties in the event of late payment.',
+            'For international groups, transfer pricing documentation and its interaction with the tax treaties signed by Burkina Faso remain the primary risk area during a tax audit.',
+            'Cabinet Pierre Abadie supports its clients in interpreting these measures, updating their internal procedures and securing their tax positions. Our detailed analysis is reflected and updated in our reference publications.',
+          ],
+        },
+        {
+          slug: 'reglementation-du-travail-ce-qui-change',
+          tag: 'Labour law',
+          date: '28 January 2024',
+          title: 'Labour regulations: what changes this year',
+          excerpt: 'Recent developments in employment law and best practices to stay compliant.',
+          body: [
+            'Burkinabè labour law evolves regularly, driven by regulations, sector-level collective agreements and the case law of labour courts.',
+            'The most sensitive areas concern the form and duration of employment contracts, overtime management, social security filings and termination procedures, whose formal requirements are a frequent source of litigation.',
+            'Our recommendation remains unchanged: audit contracts and payslips periodically, formalise disciplinary procedures and keep a written record of exchanges with employee representatives.',
+            "The firm's labour law department assists employers throughout, from compliance audits to representation in disputes. These topics are covered in detail in our publication on labour regulations.",
+          ],
+        },
+        {
+          slug: 'cabinet-renforce-equipe-pluridisciplinaire',
+          tag: 'Firm',
+          date: '9 January 2024',
+          title: 'Cabinet Pierre Abadie strengthens its multidisciplinary team',
+          excerpt: 'New staff join our accounting and legal advisory departments.',
+          body: [
+            'The firm continues to strengthen its teams in order to support the growth of its clients in Burkina Faso and across the sub-region.',
+            'New staff are joining the accounting, tax advisory and labour law departments. This multidisciplinary set-up allows a single matter to be handled from its accounting, tax and legal angles without changing contact person.',
+            'It also supports our research and publishing activity, which produces the books and handbooks the firm releases each year on taxation, regulation and business law.',
+            'Spontaneous applications remain welcome and are reviewed throughout the year.',
+          ],
+        },
       ],
     },
     presse: {
@@ -486,14 +613,63 @@ export const messages = {
       theyTalked: 'They talked about us',
     },
     postsPage: {
-      subtitle: 'Tips, insights and short updates from our experts.',
+      subtitle: 'The firm\u2019s publications: our books, handbooks and annotated collections of legal texts.',
+      intro:
+        'Cabinet Pierre Abadie runs a continuous publishing activity on taxation, regulation and business law in Burkina Faso. Every publication is written by our teams, based on the official texts and on our day-to-day practice with businesses.',
+      allBooks: 'See all our publications',
+      readBook: 'Discover the book',
+      followTitle: 'Follow the firm\u2019s publications',
+      followText:
+        'Our releases, updates and analysis are shared on our social media channels.',
       items: [
-        'Tax filing deadlines not to miss this quarter.',
-        '5 points to watch before a tax audit.',
-        'Hiring in Burkina Faso: the essential formalities.',
-        'SYSCOHADA: what every director should know.',
-        'Tax treaties: avoiding double taxation.',
-        'Preparing your year-end accounts properly.',
+        {
+          img: '4-Memento-Fiscal-BF_Page_1-212x300.jpg',
+          tag: 'Handbook',
+          date: 'Updated yearly',
+          title: 'Burkina Faso Tax Handbook',
+          excerpt:
+            'All taxes and duties applicable to businesses, presented tax by tax, together with filing obligations and payment deadlines.',
+        },
+        {
+          img: '220206-couv-REGL-FISCALE-2022-page-1_Page_1-212x300.jpg',
+          tag: 'Regulation',
+          date: 'Consolidated edition',
+          title: 'Tax regulations',
+          excerpt:
+            'The General Tax Code and its implementing texts, consolidated and annotated in the light of the tax authorities\u2019 practice.',
+        },
+        {
+          img: '180901-Couv-Reglementation-du-Travail_Page_1-212x300.jpg',
+          tag: 'Labour law',
+          date: 'Consolidated edition',
+          title: 'Labour regulations',
+          excerpt:
+            'The Labour Code, collective agreements and social security texts gathered in a single volume for employers and HR departments.',
+        },
+        {
+          img: '24-Reglementation-du-secteur-MINIER-BF-en-FR_Page_1-212x300.jpg',
+          tag: 'Mining sector',
+          date: 'Latest release',
+          title: 'Mining sector regulations',
+          excerpt:
+            'The legal, tax and customs regime applicable to mining titles, subcontractors and exploration companies in Burkina Faso.',
+        },
+        {
+          img: '150422-Couv-Fiscalite-Internationale_Page_1-211x300.jpg',
+          tag: 'International tax',
+          date: 'Reference work',
+          title: 'International taxation',
+          excerpt:
+            'Tax treaties, withholding taxes and transfer pricing: the rules applicable to flows between Burkina Faso and abroad.',
+        },
+        {
+          img: 'Couv-Reglementation-douaniere-tome-I_Page_1-204x300.jpg',
+          tag: 'Customs',
+          date: 'Volume I',
+          title: 'Customs regulations',
+          excerpt:
+            'Customs regimes, customs valuation and disputes: a working tool for importers, exporters and freight forwarders.',
+        },
       ],
     },
     rejoindre: {
@@ -521,7 +697,7 @@ export const messages = {
       address: '143 rue 4.107, Ouagadougou, Burkina Faso',
       emailLabel: 'Email',
       phoneLabel: 'Phone',
-      phone: '+226 25 33 23 25',
+      phone: CONTACT_PHONE,
       subjects: ['Tax advisory', 'Labour law advisory', 'Accounting & audit', 'Recruitment', 'Other'],
       fName: 'Full name',
       fNamePh: 'Your name',
@@ -543,7 +719,7 @@ export const messages = {
       cards: [
         { icon: 'pin', title: 'Address', lines: ['Cabinet Pierre Abadie', '143 rue 4.107, Ouagadougou, Burkina Faso'] },
         { icon: 'mail', title: 'Email', lines: [CONTACT_EMAIL] },
-        { icon: 'phone', title: 'Phone', lines: ['+226 25 33 23 25'] },
+        { icon: 'phone', title: 'Phone', lines: [CONTACT_PHONE] },
       ],
       mapTitle: 'Ouagadougou map',
     },

@@ -9,6 +9,7 @@ import ExpertiseComptable from './pages/ExpertiseComptable'
 import NosClients from './pages/NosClients'
 import NosOuvrages from './pages/NosOuvrages'
 import Actualites from './pages/Actualites'
+import Article from './pages/Article'
 import PresseTV from './pages/PresseTV'
 import NosPosts from './pages/NosPosts'
 import NousRejoindre from './pages/NousRejoindre'
@@ -26,6 +27,7 @@ const routes = [
   { path: 'nos-clients', element: <NosClients /> },
   { path: 'nos-ouvrages', element: <NosOuvrages /> },
   { path: 'actualites', element: <Actualites /> },
+  { path: 'actualites/:slug', element: <Article /> },
   { path: 'nos-actions-presse-et-tv', element: <PresseTV /> },
   { path: 'nos-posts', element: <NosPosts /> },
   { path: 'nous-rejoindre', element: <NousRejoindre /> },
