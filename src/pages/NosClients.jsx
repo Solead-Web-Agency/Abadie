@@ -3,9 +3,11 @@ import CTA from '../components/CTA'
 import Logo from '../components/Logo'
 import { clients, correspondents } from '../data/assets'
 import { useLang } from '../i18n/useLang'
+import { usePageMeta } from '../i18n/usePageMeta'
 
 export default function NosClients() {
   const { t } = useLang()
+  usePageMeta()
   return (
     <>
       <PageBanner
@@ -20,11 +22,11 @@ export default function NosClients() {
             <h2 className="text-2xl font-extrabold md:text-3xl">{t.clientsPage.corrTitle}</h2>
             <p className="mx-auto mt-2 max-w-2xl text-pa-gray">{t.clientsPage.corrText}</p>
           </div>
-          <div className="mt-8 grid grid-cols-2 items-center gap-5 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-8 flex flex-wrap justify-center gap-6">
             {correspondents.map((c) => (
               <div
                 key={c.img}
-                className="flex h-24 items-center justify-center rounded-xl border border-black/5 bg-white p-5 shadow-sm"
+                className="flex h-24 w-[calc((100%-1.5rem)/2)] sm:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-6rem)/5)] items-center justify-center rounded-xl border border-black/5 bg-white p-5 shadow-sm"
               >
                 <Logo img={c.img} name={c.name} />
               </div>

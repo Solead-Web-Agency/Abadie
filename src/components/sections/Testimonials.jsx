@@ -12,7 +12,7 @@ export default function Testimonials() {
   return (
     <section className="relative overflow-hidden bg-pa-ink py-20 text-white">
       <div className="absolute inset-0 bg-gradient-to-br from-pa-ink via-[#06351f] to-pa-green-dark opacity-90" />
-      <div className="relative mx-auto max-w-4xl px-4 text-center">
+      <div className="focus-light relative mx-auto max-w-4xl px-4 text-center">
         <p className="text-sm font-bold uppercase tracking-widest text-emerald-200">
           {t.testimonials.eyebrow}
         </p>
@@ -22,7 +22,8 @@ export default function Testimonials() {
 
         <div className="mt-10">
           <svg
-            className="mx-auto h-12 w-12 text-pa-green"
+            aria-hidden="true"
+            className="mx-auto h-12 w-12 text-emerald-300"
             viewBox="0 0 24 24"
             fill="currentColor"
           >
@@ -30,6 +31,7 @@ export default function Testimonials() {
           </svg>
           <blockquote
             key={i}
+            aria-live="polite"
             className="pa-fade mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/90 md:text-xl"
           >
             « {item.text} »
@@ -40,18 +42,19 @@ export default function Testimonials() {
         <div className="mt-8 flex items-center justify-center gap-4">
           <button
             type="button"
-            aria-label="Previous"
+            aria-label={t.testimonials.prev}
             onClick={() => go(-1)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition-colors hover:bg-white/10"
           >
-            ←
+            <span aria-hidden="true">←</span>
           </button>
           <div className="flex gap-2">
             {items.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
-                aria-label={`Testimonial ${idx + 1}`}
+                aria-label={`${t.testimonials.goTo} ${idx + 1}`}
+                aria-current={idx === i ? 'true' : undefined}
                 onClick={() => setI(idx)}
                 className={`h-2 rounded-full transition-all ${
                   idx === i ? 'w-8 bg-pa-green' : 'w-2 bg-white/30'
@@ -61,11 +64,11 @@ export default function Testimonials() {
           </div>
           <button
             type="button"
-            aria-label="Next"
+            aria-label={t.testimonials.next}
             onClick={() => go(1)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition-colors hover:bg-white/10"
           >
-            →
+            <span aria-hidden="true">→</span>
           </button>
         </div>
       </div>

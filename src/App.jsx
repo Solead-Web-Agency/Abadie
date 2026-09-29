@@ -8,13 +8,15 @@ import DroitSocial from './pages/DroitSocial'
 import ExpertiseComptable from './pages/ExpertiseComptable'
 import NosClients from './pages/NosClients'
 import NosOuvrages from './pages/NosOuvrages'
-import Actualites from './pages/Actualites'
-import Article from './pages/Article'
 import PresseTV from './pages/PresseTV'
+import PresseArticle from './pages/PresseArticle'
 import NosPosts from './pages/NosPosts'
+import Post from './pages/Post'
 import NousRejoindre from './pages/NousRejoindre'
 import NousEcrire from './pages/NousEcrire'
 import NosCoordonnees from './pages/NosCoordonnees'
+import MentionsLegales from './pages/MentionsLegales'
+import Confidentialite from './pages/Confidentialite'
 import NotFound from './pages/NotFound'
 
 // Canonical (French) paths. Rendered once at root and once under /en.
@@ -26,13 +28,15 @@ const routes = [
   { path: 'expertise-comptable', element: <ExpertiseComptable /> },
   { path: 'nos-clients', element: <NosClients /> },
   { path: 'nos-ouvrages', element: <NosOuvrages /> },
-  { path: 'actualites', element: <Actualites /> },
-  { path: 'actualites/:slug', element: <Article /> },
   { path: 'nos-actions-presse-et-tv', element: <PresseTV /> },
+  { path: 'nos-actions-presse-et-tv/:slug', element: <PresseArticle /> },
   { path: 'nos-posts', element: <NosPosts /> },
+  { path: 'nos-posts/:slug', element: <Post /> },
   { path: 'nous-rejoindre', element: <NousRejoindre /> },
   { path: 'nous-ecrire', element: <NousEcrire /> },
   { path: 'nos-coordonnees', element: <NosCoordonnees /> },
+  { path: 'mentions-legales', element: <MentionsLegales /> },
+  { path: 'politique-de-confidentialite', element: <Confidentialite /> },
   { path: '*', element: <NotFound /> },
 ]
 

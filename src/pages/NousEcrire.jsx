@@ -1,14 +1,25 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import PageBanner from '../components/PageBanner'
 import Icon from '../components/Icon'
 import { useLang } from '../i18n/useLang'
-import { CONTACT_EMAIL } from '../i18n/translations'
+import { usePageMeta } from '../i18n/usePageMeta'
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_HREF,
+  MAPS_SEARCH_HREF,
+  WHATSAPP_HREF,
+} from '../i18n/translations'
 
 const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+const FIELDS = ['name', 'email', 'message']
 
 export default function NousEcrire() {
-  const { t } = useLang()
+  const { t, withLang } = useLang()
   const tr = t.ecrire
+  usePageMeta()
   const [sent, setSent] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
@@ -17,6 +28,7 @@ export default function NousEcrire() {
     subject: tr.subjects[0],
     message: '',
   })
+  const refs = { name: useRef(null), email: useRef(null), message: useRef(null) }
 
   const update = (k) => (e) => {
     setForm((f) => ({ ...f, [k]: e.target.value }))
@@ -36,21 +48,47 @@ export default function NousEcrire() {
     const er = validate()
     if (Object.keys(er).length) {
       setErrors(er)
+      refs[FIELDS.find((f) => er[f])].current?.focus()
       return
     }
     const subject = `[${form.subject}] ${form.name}`
     const body = `${form.message}\n\n— ${form.name} (${form.email})`
-    const href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`
-    window.location.href = href
     setSent(true)
   }
 
-  const fieldClass = (k) =>
-    `mt-1 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-pa-green/20 ${
-      errors[k] ? 'border-pa-red focus:border-pa-red' : 'border-black/10 focus:border-pa-green'
-    }`
+  const fieldProps = (k) => ({
+    id: `contact-${k}`,
+    name: k,
+    ref: refs[k],
+    value: form[k],
+    onChange: update(k),
+    required: true,
+    'aria-required': 'true',
+    'aria-invalid': errors[k] ? 'true' : undefined,
+    'aria-describedby': errors[k] ? `contact-${k}-error` : undefined,
+    className: `mt-1 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-pa-green/30 ${
+      errors[k] ? 'border-pa-red focus:border-pa-red' : 'border-black/25 focus:border-pa-green'
+    }`,
+  })
+
+  const label = (k, children) => (
+    <label htmlFor={`contact-${k}`} className="text-sm font-semibold">
+      {children} <span aria-hidden="true" className="text-pa-red">*</span>
+    </label>
+  )
+
+  const error = (k) =>
+    errors[k] ? (
+      <p id={`contact-${k}-error`} className="mt-1 text-xs font-medium text-pa-red">
+        {errors[k]}
+      </p>
+    ) : null
+
+  const hasErrors = Object.values(errors).some(Boolean)
+  const newTab = <span className="sr-only"> {t.common.newTab}</span>
 
   return (
     <>
@@ -61,41 +99,38 @@ export default function NousEcrire() {
             <h2 className="text-2xl font-extrabold">{tr.heading}</h2>
             <p className="mt-3 text-pa-gray">{tr.lead}</p>
             <ul className="mt-8 space-y-5">
-              <li className="flex items-start gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-pa-green/10 text-pa-green">
-                  <Icon name="pin" className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="font-semibold">{tr.addressLabel}</p>
-                  <p className="text-sm text-pa-gray">{tr.address}</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-pa-green/10 text-pa-green">
-                  <Icon name="mail" className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="font-semibold">{tr.emailLabel}</p>
-                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm text-pa-gray hover:text-pa-green">
-                    {CONTACT_EMAIL}
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-pa-green/10 text-pa-green">
-                  <Icon name="phone" className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="font-semibold">{tr.phoneLabel}</p>
-                  <p className="text-sm text-pa-gray">{tr.phone}</p>
-                </div>
-              </li>
+              {[
+                { icon: 'pin', label: tr.addressLabel, href: MAPS_SEARCH_HREF, text: CONTACT_ADDRESS, ext: true },
+                { icon: 'mail', label: tr.emailLabel, href: `mailto:${CONTACT_EMAIL}`, text: CONTACT_EMAIL },
+                { icon: 'phone', label: tr.phoneLabel, href: `tel:${CONTACT_PHONE_HREF}`, text: CONTACT_PHONE },
+                { icon: 'whatsapp', label: tr.whatsappLabel, href: WHATSAPP_HREF, text: CONTACT_PHONE, ext: true },
+              ].map((c) => (
+                <li key={c.label} className="flex items-start gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-pa-green/10 text-pa-green">
+                    <Icon name={c.icon} className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="font-semibold">{c.label}</p>
+                    <a
+                      href={c.href}
+                      {...(c.ext ? { target: '_blank', rel: 'noreferrer' } : {})}
+                      className="text-sm text-pa-gray hover:text-pa-green hover:underline"
+                    >
+                      {c.text}
+                      {c.ext && newTab}
+                    </a>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="lg:col-span-3">
             {sent ? (
-              <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-pa-green/30 bg-pa-green/5 p-10 text-center">
+              <div
+                role="status"
+                className="flex h-full flex-col items-center justify-center rounded-2xl border border-pa-green/30 bg-pa-green/5 p-10 text-center"
+              >
                 <span className="flex h-14 w-14 items-center justify-center rounded-full bg-pa-green text-white">
                   <Icon name="check" className="h-7 w-7" />
                 </span>
@@ -122,60 +157,73 @@ export default function NousEcrire() {
               <form
                 onSubmit={submit}
                 noValidate
-                className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm sm:p-8"
+                aria-labelledby="contact-form-title"
+                className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm sm:p-8"
               >
+                <h2 id="contact-form-title" className="sr-only">
+                  {tr.heading}
+                </h2>
+                <p className="mb-5 text-xs text-pa-gray">{tr.required}</p>
+                {hasErrors && (
+                  <p role="alert" className="mb-5 rounded-lg bg-pa-red/10 px-4 py-3 text-sm font-medium text-pa-red">
+                    {tr.errSummary}
+                  </p>
+                )}
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="block">
-                    <span className="text-sm font-semibold">{tr.fName}</span>
-                    <input
-                      value={form.name}
-                      onChange={update('name')}
-                      className={fieldClass('name')}
-                      placeholder={tr.fNamePh}
-                    />
-                    {errors.name && <span className="mt-1 block text-xs text-pa-red">{errors.name}</span>}
-                  </label>
-                  <label className="block">
-                    <span className="text-sm font-semibold">{tr.fEmail}</span>
+                  <div>
+                    {label('name', tr.fName)}
+                    <input type="text" autoComplete="name" placeholder={tr.fNamePh} {...fieldProps('name')} />
+                    {error('name')}
+                  </div>
+                  <div>
+                    {label('email', tr.fEmail)}
                     <input
                       type="email"
-                      value={form.email}
-                      onChange={update('email')}
-                      className={fieldClass('email')}
+                      autoComplete="email"
+                      inputMode="email"
                       placeholder={tr.fEmailPh}
+                      {...fieldProps('email')}
                     />
-                    {errors.email && <span className="mt-1 block text-xs text-pa-red">{errors.email}</span>}
-                  </label>
+                    {error('email')}
+                  </div>
                 </div>
-                <label className="mt-5 block">
-                  <span className="text-sm font-semibold">{tr.fSubject}</span>
+                <div className="mt-5">
+                  <label htmlFor="contact-subject" className="text-sm font-semibold">
+                    {tr.fSubject}
+                  </label>
                   <select
+                    id="contact-subject"
+                    name="subject"
                     value={form.subject}
                     onChange={update('subject')}
-                    className="mt-1 w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm outline-none focus:border-pa-green focus:ring-2 focus:ring-pa-green/20"
+                    className="mt-1 w-full rounded-lg border border-black/25 bg-white px-3 py-2.5 text-sm outline-none focus:border-pa-green focus:ring-2 focus:ring-pa-green/30"
                   >
                     {tr.subjects.map((s) => (
                       <option key={s}>{s}</option>
                     ))}
                   </select>
-                </label>
-                <label className="mt-5 block">
-                  <span className="text-sm font-semibold">{tr.fMessage}</span>
-                  <textarea
-                    rows={5}
-                    value={form.message}
-                    onChange={update('message')}
-                    className={fieldClass('message')}
-                    placeholder={tr.fMessagePh}
-                  />
-                  {errors.message && <span className="mt-1 block text-xs text-pa-red">{errors.message}</span>}
-                </label>
+                </div>
+                <div className="mt-5">
+                  {label('message', tr.fMessage)}
+                  <textarea rows={5} placeholder={tr.fMessagePh} {...fieldProps('message')} />
+                  {error('message')}
+                </div>
                 <button
                   type="submit"
+                  aria-describedby="contact-send-hint"
                   className="mt-6 w-full rounded-md bg-pa-green px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-pa-green-dark"
                 >
                   {tr.send}
                 </button>
+                <p id="contact-send-hint" className="mt-3 text-xs text-pa-gray">
+                  {tr.sendHint}
+                </p>
+                <p className="mt-1 text-xs text-pa-gray">
+                  {tr.privacyNote}{' '}
+                  <Link to={withLang('/politique-de-confidentialite')} className="font-semibold text-pa-green underline">
+                    {tr.privacyLink}
+                  </Link>
+                </p>
               </form>
             )}
           </div>

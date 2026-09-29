@@ -5,7 +5,6 @@ export const nav = [
     id: 'cabinet',
     children: [
       { id: 'qui', to: '/qui-sommes-nous' },
-      { id: 'actu', to: '/actualites' },
       { id: 'rejoindre', to: '/nous-rejoindre' },
       { id: 'ecrire', to: '/nous-ecrire' },
       { id: 'coord', to: '/nos-coordonnees' },

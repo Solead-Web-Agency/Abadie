@@ -1,12 +1,17 @@
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
+import { useLang } from '../i18n/useLang'
 
 export default function Layout() {
+  const { t } = useLang()
   return (
     <div className="flex min-h-screen flex-col bg-white">
+      <a href="#contenu" className="pa-skip">
+        {t.common.skip}
+      </a>
       <Header />
-      <main className="flex-1">
+      <main id="contenu" tabIndex={-1} className="flex-1 focus:outline-none">
         <Outlet />
       </main>
       <Footer />

@@ -6,6 +6,7 @@ import Testimonials from '../components/sections/Testimonials'
 import Correspondents from '../components/sections/Correspondents'
 import Clients from '../components/sections/Clients'
 import { useLang } from '../i18n/useLang'
+import { usePageMeta } from '../i18n/usePageMeta'
 
 function Stats() {
   const { t } = useLang()
@@ -26,6 +27,7 @@ function Stats() {
 }
 
 export default function Home() {
+  usePageMeta()
   return (
     <>
       <Hero />

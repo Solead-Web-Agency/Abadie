@@ -15,11 +15,12 @@ export default function Correspondents() {
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-pa-gray">{t.correspondents.text}</p>
 
-        <div className="mt-12 grid grid-cols-2 items-center gap-6 sm:grid-cols-3 lg:grid-cols-5">
+        {/* Flex (not grid) so an incomplete last row stays centred. */}
+        <div className="mt-12 flex flex-wrap justify-center gap-6">
           {correspondents.map((c) => (
             <div
               key={c.img}
-              className="flex h-24 items-center justify-center rounded-xl border border-black/5 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+              className="flex h-24 w-[calc((100%-1.5rem)/2)] sm:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-6rem)/5)] items-center justify-center rounded-xl border border-black/5 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <Logo img={c.img} name={c.name} className="grayscale transition hover:grayscale-0" />
             </div>

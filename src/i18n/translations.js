@@ -1,10 +1,31 @@
 // Bilingual content. Image filenames live in src/data/assets.js (language-neutral).
 // Structure is identical across `fr` and `en` so components can read t.<path> safely.
 
+// Official domain (canonical URLs, sitemap). Keep in sync with public/sitemap.xml.
+export const SITE_URL = 'https://pierreabadie.com'
+
 export const CONTACT_EMAIL = 'pierre@abadie.bf'
-export const CONTACT_PHONE = '07 51 51 51'
+export const CONTACT_PHONE = '+226 07 51 51 51'
 export const CONTACT_PHONE_HREF = '+22607515151'
-export const CONTACT_ADDRESS = '143 rue 4.107, Ouagadougou'
+export const WHATSAPP_HREF = 'https://wa.me/22607515151'
+export const CONTACT_ADDRESS_LINES = ['55, rue 3.37', '01 BP 964 Ouagadougou 01', 'Burkina Faso']
+export const CONTACT_ADDRESS = CONTACT_ADDRESS_LINES.join(', ')
+export const CONTACT_ADDRESS_SHORT = '55, rue 3.37, Ouagadougou'
+
+const MAPS_QUERY = '55 rue 3.37, Ouagadougou, Burkina Faso'
+export const MAPS_DIRECTIONS_HREF = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAPS_QUERY)}`
+export const MAPS_SEARCH_HREF = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAPS_QUERY)}`
+export const MAPS_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&z=16&output=embed`
+
+// Legal identification shown on the legal notice page. Fields left null are
+// not displayed — to be completed with the information supplied by the firm.
+export const LEGAL = {
+  name: 'Cabinet Pierre Abadie',
+  form: null,
+  rccm: null,
+  ifu: null,
+  publicationDirector: null,
+}
 
 export const SOCIALS = [
   { name: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/pierre-abadie-b8829512/' },
@@ -18,11 +39,21 @@ export const messages = {
       home: 'Accueil',
       readMore: 'En savoir plus',
       contact: 'Nous contacter',
+      skip: 'Aller au contenu principal',
+      newTab: '(nouvel onglet)',
+      breadcrumb: "Fil d'Ariane",
     },
     header: {
       tagline: 'Conseil • Fiscalité • Audit',
       ecrire: 'Nous écrire',
       banner: 'Le conseil des entreprises internationales installées au Burkina Faso',
+      mainNav: 'Navigation principale',
+      openMenu: 'Ouvrir le menu',
+      closeMenu: 'Fermer le menu',
+      lang: 'Langue du site',
+      langNames: { fr: 'Français', en: 'English' },
+      phone: 'Tél.',
+      socials: 'Réseaux sociaux',
     },
     nav: {
       cabinet: 'Le Cabinet',
@@ -32,7 +63,8 @@ export const messages = {
       presse: 'Actions presse & TV',
       posts: 'Nos posts',
       qui: 'Qui sommes-nous ?',
-      actu: 'Actualités du Cabinet',
+      legal: 'Mentions légales',
+      privacy: 'Politique de confidentialité',
       rejoindre: 'Nous rejoindre',
       ecrire: 'Nous écrire',
       coord: 'Nos coordonnées',
@@ -61,6 +93,11 @@ export const messages = {
       ],
       ctaMore: 'En savoir plus',
       ctaContact: 'Nous contacter',
+      label: 'Diaporama de présentation',
+      pause: 'Mettre en pause le diaporama',
+      play: 'Relancer le diaporama',
+      slide: 'Afficher la diapositive',
+      coverAlt: 'Ouvrage du Cabinet Pierre Abadie',
     },
     stats: [
       { value: '1998', label: 'Présent au Burkina Faso' },
@@ -112,10 +149,15 @@ export const messages = {
       title: 'Nos ouvrages',
       text: "Une production de référence sur la fiscalité, le droit et la réglementation au Burkina Faso et dans l'espace OHADA.",
       all: 'Tous nos ouvrages',
+      enlarge: "Agrandir le visuel de l'ouvrage",
+      close: 'Fermer',
     },
     testimonials: {
       eyebrow: 'Témoignages',
       title: 'Ils nous font confiance',
+      prev: 'Témoignage précédent',
+      next: 'Témoignage suivant',
+      goTo: 'Afficher le témoignage',
       items: [
         {
           role: 'Conseil Fiscal',
@@ -141,18 +183,19 @@ export const messages = {
       title: 'Nos clients finaux',
       text: 'Le Cabinet Pierre Abadie dispose de clients sur les cinq continents.',
       all: 'Toutes nos références',
+      pause: 'Mettre en pause le défilement des logos',
+      play: 'Relancer le défilement des logos',
     },
     footer: {
       tagline:
         "Le conseiller fiscal des entreprises au Burkina Faso. Cabinet d'expertise comptable et de conseil basé au Burkina Faso depuis 1998, au service des entreprises internationales sur les cinq continents.",
       navTitle: 'Navigation',
       contactTitle: 'Contact',
-      location: '143 rue 4.107, Ouagadougou, Burkina Faso',
       coord: 'Nos coordonnées',
       ecrire: 'Nous écrire',
       rejoindre: 'Nous rejoindre',
+      whatsapp: 'WhatsApp',
       rights: 'Tous droits réservés.',
-      note: "Reproduction fidèle d'un site archivé — réalisée à des fins de démonstration.",
     },
     cta: {
       title: "Besoin d'un accompagnement sur mesure ?",
@@ -207,122 +250,98 @@ export const messages = {
       ctaTitle: 'Vous souhaitez vous procurer un ouvrage ?',
       ctaText: 'Contactez le cabinet pour la disponibilité et les modalités de commande.',
     },
-    actualites: {
-      subtitle: 'Les dernières informations et analyses de nos experts.',
-      readMore: 'Lire la suite',
-      back: 'Retour aux actualités',
-      publishedOn: 'Publié le',
-      moreTitle: 'Autres actualités',
-      posts: [
-        {
-          slug: 'loi-de-finances-mesures-entreprises',
-          tag: 'Fiscalité',
-          date: '12 février 2024',
-          title: 'Loi de finances : les principales mesures pour les entreprises',
-          excerpt: "Tour d'horizon des nouveautés fiscales applicables aux sociétés implantées au Burkina Faso et leurs impacts pratiques.",
-          body: [
-            "Chaque loi de finances redessine une partie du paysage fiscal des entreprises implantées au Burkina Faso. Au-delà des taux, ce sont souvent les obligations déclaratives et les modalités de contrôle qui emportent les conséquences pratiques les plus lourdes pour les directions financières.",
-            "Nos équipes retiennent trois axes de vigilance : le traitement des charges déductibles et leur justification, les retenues à la source sur les prestations rendues par des non-résidents, et le calendrier des acomptes qui conditionne le calcul des pénalités en cas de retard.",
-            "Pour les groupes internationaux, la documentation des prix de transfert et son articulation avec les conventions fiscales signées par le Burkina Faso restent le premier poste de risque lors d'une vérification de comptabilité.",
-            "Le Cabinet Pierre Abadie accompagne ses clients dans la lecture de ces mesures, la mise à jour de leurs procédures internes et la sécurisation de leurs positions fiscales. Nos analyses détaillées sont reprises et actualisées dans nos ouvrages de référence.",
-          ],
-        },
-        {
-          slug: 'reglementation-du-travail-ce-qui-change',
-          tag: 'Droit social',
-          date: '28 janvier 2024',
-          title: 'Réglementation du travail : ce qui change cette année',
-          excerpt: 'Les évolutions récentes du droit du travail et les bonnes pratiques pour rester en conformité.',
-          body: [
-            "Le droit du travail burkinabè évolue régulièrement, sous l'effet des textes réglementaires, des conventions collectives sectorielles et de la jurisprudence des tribunaux du travail.",
-            "Les points les plus sensibles concernent la forme et la durée des contrats, la gestion des heures supplémentaires, les déclarations sociales et les procédures de rupture, dont le formalisme est fréquemment source de contentieux.",
-            "Notre recommandation reste la même : auditer périodiquement les contrats et les bulletins de paie, formaliser les procédures disciplinaires et conserver la traçabilité des échanges avec les représentants du personnel.",
-            "Le département droit social du cabinet assiste les employeurs dans ces diligences, de l'audit de conformité à la représentation en cas de litige. Ces sujets sont traités en détail dans notre ouvrage consacré à la réglementation du travail.",
-          ],
-        },
-        {
-          slug: 'cabinet-renforce-equipe-pluridisciplinaire',
-          tag: 'Cabinet',
-          date: '9 janvier 2024',
-          title: 'Le Cabinet Pierre Abadie renforce son équipe pluridisciplinaire',
-          excerpt: "De nouveaux collaborateurs rejoignent nos départements d'expertise comptable et de conseil juridique.",
-          body: [
-            "Le cabinet poursuit le renforcement de ses équipes afin d'accompagner la croissance de ses clients au Burkina Faso et dans la sous-région.",
-            "De nouveaux collaborateurs rejoignent les départements d'expertise comptable, de conseil fiscal et de droit social. Cette organisation pluridisciplinaire permet de traiter un même dossier sous ses angles comptable, fiscal et juridique, sans rupture d'interlocuteur.",
-            "Elle soutient également notre activité de recherche et d'édition, à l'origine des ouvrages et mémentos que le cabinet publie chaque année sur la fiscalité, la réglementation et le droit des affaires.",
-            "Les candidatures spontanées restent les bienvenues : elles sont étudiées tout au long de l'année.",
-          ],
-        },
-      ],
-    },
     presse: {
       subtitle: 'Le Cabinet Pierre Abadie intervient régulièrement dans les médias.',
-      appearances: [
-        { media: 'Télévision nationale', title: 'Interview : la fiscalité des entreprises au Burkina Faso' },
-        { media: 'Presse économique', title: 'Tribune : optimiser sa charge fiscale en toute légalité' },
-        { media: 'Radio', title: 'Émission : comprendre le droit du travail burkinabè' },
-      ],
+      intro:
+        'Retrouvez les articles de presse consacrés aux interventions, formations et publications du cabinet. Chaque article est consultable en ligne et téléchargeable au format PDF.',
+      readMore: "Consulter l'article",
+      back: 'Retour aux actions presse & TV',
+      moreTitle: 'Autres articles',
       theyTalked: 'Ils ont parlé de nous',
     },
     postsPage: {
-      subtitle: 'Les publications du cabinet : nos ouvrages, mémentos et recueils de textes commentés.',
+      subtitle: 'Les analyses et fiches pratiques du cabinet sur la fiscalité et le droit des affaires au Burkina Faso.',
       intro:
-        "Le Cabinet Pierre Abadie mène une activité d'édition continue sur la fiscalité, la réglementation et le droit des affaires au Burkina Faso. Chaque publication est rédigée par nos équipes, à partir des textes officiels et de notre pratique quotidienne auprès des entreprises.",
-      allBooks: 'Voir tous nos ouvrages',
-      readBook: "Découvrir l'ouvrage",
+        'Le Cabinet Pierre Abadie partage régulièrement ses analyses sur l’actualité fiscale et juridique. Chaque publication est consultable en ligne et téléchargeable.',
+      readMore: 'Lire la publication',
+      back: 'Retour aux posts',
+      moreTitle: 'Autres publications',
       followTitle: 'Suivre les publications du cabinet',
-      followText:
-        'Nos parutions, mises à jour et analyses sont relayées sur nos réseaux sociaux.',
-      items: [
+      followText: 'Nos parutions, mises à jour et analyses sont relayées sur nos réseaux sociaux.',
+    },
+    doc: {
+      publishedOn: 'Publié le',
+      openPdf: 'Ouvrir le PDF',
+      download: 'Télécharger le PDF',
+      pdfTitle: 'Document PDF',
+      pdfHint: "Si le document ne s'affiche pas correctement, ouvrez-le dans un nouvel onglet.",
+      frenchOnly: null,
+      fullText: 'Texte intégral',
+    },
+    legal: {
+      subtitle: "Informations relatives à l'éditeur et à l'hébergeur du site.",
+      publisherTitle: 'Éditeur du site',
+      fields: {
+        name: 'Dénomination',
+        form: 'Forme juridique',
+        address: 'Siège',
+        phone: 'Téléphone',
+        email: 'E-mail',
+        rccm: 'RCCM',
+        ifu: 'IFU',
+        publicationDirector: 'Directeur de la publication',
+      },
+      hostTitle: 'Hébergement',
+      host: 'Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis — vercel.com',
+      ipTitle: 'Propriété intellectuelle',
+      ip: "L'ensemble des contenus de ce site (textes, visuels des ouvrages, logos, documents) est la propriété du Cabinet Pierre Abadie ou de leurs auteurs respectifs. Toute reproduction sans autorisation préalable est interdite. Les articles de presse reproduits restent la propriété des médias qui les ont publiés.",
+      dataTitle: 'Données personnelles',
+      dataText: 'Le traitement des données personnelles est décrit dans notre',
+    },
+    privacy: {
+      subtitle: 'Comment le Cabinet Pierre Abadie traite les informations que vous lui transmettez.',
+      updated: 'Dernière mise à jour : septembre 2026',
+      sections: [
         {
-          img: '4-Memento-Fiscal-BF_Page_1-212x300.jpg',
-          tag: 'Mémento',
-          date: 'Mise à jour annuelle',
-          title: 'Mémento fiscal du Burkina Faso',
-          excerpt:
-            "L'ensemble des impôts et taxes applicables aux entreprises, présenté impôt par impôt, avec les obligations déclaratives et les échéances de paiement.",
+          title: 'Responsable du traitement',
+          text: [
+            "Le responsable du traitement est le Cabinet Pierre Abadie, dont les coordonnées figurent dans les mentions légales.",
+          ],
         },
         {
-          img: '220206-couv-REGL-FISCALE-2022-page-1_Page_1-212x300.jpg',
-          tag: 'Réglementation',
-          date: 'Édition consolidée',
-          title: 'La réglementation fiscale',
-          excerpt:
-            "Le Code général des impôts et ses textes d'application, consolidés et commentés à la lumière de la pratique de l'administration fiscale.",
+          title: 'Données collectées',
+          text: [
+            "Le formulaire « Nous écrire » ne transmet aucune donnée à nos serveurs : il prépare un e-mail dans votre propre messagerie (nom, adresse e-mail, objet et message). Vous restez libre de l'envoyer ou non.",
+            'Les données que vous nous adressez par e-mail, téléphone ou WhatsApp sont utilisées uniquement pour répondre à votre demande, assurer le suivi de la relation et, le cas échéant, étudier votre candidature.',
+          ],
         },
         {
-          img: '180901-Couv-Reglementation-du-Travail_Page_1-212x300.jpg',
-          tag: 'Droit social',
-          date: 'Édition consolidée',
-          title: 'La réglementation du travail',
-          excerpt:
-            'Code du travail, conventions collectives et textes sociaux réunis en un volume, à destination des employeurs et des services des ressources humaines.',
+          title: 'Durée de conservation',
+          text: [
+            'Les échanges sont conservés le temps nécessaire au traitement de votre demande, puis pendant la durée de la relation professionnelle. Les candidatures non retenues sont conservées au plus deux ans.',
+          ],
         },
         {
-          img: '24-Reglementation-du-secteur-MINIER-BF-en-FR_Page_1-212x300.jpg',
-          tag: 'Secteur minier',
-          date: 'Dernière parution',
-          title: 'La réglementation du secteur minier',
-          excerpt:
-            "Le régime juridique, fiscal et douanier des titres miniers, des sous-traitants et des sociétés d'exploration au Burkina Faso.",
+          title: 'Destinataires',
+          text: [
+            "Vos données sont destinées aux seuls collaborateurs du cabinet. Elles ne sont ni vendues ni cédées à des tiers.",
+          ],
         },
         {
-          img: '150422-Couv-Fiscalite-Internationale_Page_1-211x300.jpg',
-          tag: 'Fiscalité internationale',
-          date: 'Ouvrage de référence',
-          title: 'La fiscalité internationale',
-          excerpt:
-            "Conventions fiscales, retenues à la source et prix de transfert : les règles applicables aux flux entre le Burkina Faso et l'étranger.",
+          title: 'Vos droits',
+          text: [
+            "Conformément à la loi n°001-2021/AN du 30 mars 2021 portant protection des personnes à l'égard du traitement des données à caractère personnel, vous disposez d'un droit d'accès, de rectification, d'opposition et d'effacement de vos données. Pour l'exercer, écrivez-nous à l'adresse indiquée ci-dessous. Vous pouvez également saisir la Commission de l'informatique et des libertés (CIL).",
+          ],
         },
         {
-          img: 'Couv-Reglementation-douaniere-tome-I_Page_1-204x300.jpg',
-          tag: 'Douane',
-          date: 'Tome I',
-          title: 'La réglementation douanière',
-          excerpt:
-            "Régimes douaniers, valeur en douane et contentieux : un outil de travail pour les importateurs, exportateurs et transitaires.",
+          title: 'Cookies',
+          text: [
+            "Ce site n'utilise aucun cookie de mesure d'audience ni de publicité, et ne dépose aucun cookie lors de la navigation. C'est pourquoi aucun bandeau de consentement n'est affiché.",
+            "Deux contenus tiers ne se chargent qu'à votre demande ou en mode respectueux de la vie privée : la carte Google Maps de la page « Nos coordonnées » (affichée uniquement après un clic de votre part, Google pouvant alors déposer des cookies) et la vidéo YouTube de présentation (intégrée en mode « youtube-nocookie »).",
+          ],
         },
       ],
+      contact: 'Pour toute question relative à vos données :',
     },
     rejoindre: {
       subtitle: 'Rejoignez une équipe rigoureuse et passionnée au service des entreprises.',
@@ -346,39 +365,74 @@ export const messages = {
       heading: 'Contactez le cabinet',
       lead: 'Décrivez-nous votre besoin, nous reviendrons vers vous dans les meilleurs délais.',
       addressLabel: 'Adresse',
-      address: '143 rue 4.107, Ouagadougou, Burkina Faso',
-      emailLabel: 'Email',
+      emailLabel: 'E-mail',
       phoneLabel: 'Téléphone',
-      phone: CONTACT_PHONE,
+      whatsappLabel: 'WhatsApp',
       subjects: ['Conseil fiscal', 'Conseil droit social', 'Expertise comptable & audit', 'Recrutement', 'Autre'],
+      required: 'Les champs marqués d’un astérisque (*) sont obligatoires.',
       fName: 'Nom complet',
       fNamePh: 'Votre nom',
-      fEmail: 'Email',
+      fEmail: 'E-mail',
       fEmailPh: 'vous@entreprise.com',
       fSubject: 'Objet',
       fMessage: 'Message',
       fMessagePh: 'Décrivez votre besoin…',
       send: 'Envoyer le message',
+      sendHint: 'Le bouton ouvre votre messagerie avec le message pré-rempli.',
+      privacyNote: 'Vos informations servent uniquement à répondre à votre demande.',
+      privacyLink: 'En savoir plus',
       errName: 'Veuillez indiquer votre nom.',
-      errEmail: 'Veuillez saisir une adresse email valide.',
+      errEmail: 'Veuillez saisir une adresse e-mail valide, par exemple nom@entreprise.com.',
       errMessage: 'Veuillez écrire votre message.',
+      errSummary: 'Le formulaire contient des erreurs. Merci de les corriger.',
       sentTitle: 'Message prêt à être envoyé',
       sentText: 'Votre messagerie vient de s’ouvrir avec le message pré-rempli. Si rien ne s’est passé, écrivez-nous directement à',
       again: 'Rédiger un autre message',
     },
     coord: {
       subtitle: 'Retrouvez le Cabinet Pierre Abadie à Ouagadougou.',
-      cards: [
-        { icon: 'pin', title: 'Adresse', lines: ['Cabinet Pierre Abadie', '143 rue 4.107, Ouagadougou, Burkina Faso'] },
-        { icon: 'mail', title: 'Email', lines: [CONTACT_EMAIL] },
-        { icon: 'phone', title: 'Téléphone', lines: [CONTACT_PHONE] },
-      ],
-      mapTitle: 'Carte Ouagadougou',
+      addressTitle: 'Adresse',
+      phoneTitle: 'Téléphone',
+      whatsappTitle: 'WhatsApp',
+      emailTitle: 'E-mail',
+      call: 'Appeler',
+      whatsapp: 'Écrire sur WhatsApp',
+      mail: 'Envoyer un e-mail',
+      directions: "Obtenir l'itinéraire",
+      openMaps: 'Voir sur Google Maps',
+      mapTitle: 'Carte : Cabinet Pierre Abadie, 55 rue 3.37, Ouagadougou',
+      mapNotice:
+        "La carte est fournie par Google Maps. Elle ne s'affiche qu'à votre demande, Google pouvant déposer des cookies.",
+      showMap: 'Afficher la carte',
     },
     notfound: {
       title: 'Page introuvable',
-      text: "La page que vous recherchez n'existe pas ou a été déplacée.",
+      text: "La page que vous recherchez n'existe pas ou a été déplacée. Voici quelques pages qui pourraient vous intéresser :",
       back: "Retour à l'accueil",
+    },
+    seo: {
+      siteName: 'Cabinet Pierre Abadie',
+      default: {
+        title: 'Cabinet Pierre Abadie | Le conseiller fiscal des entreprises au Burkina Faso',
+        description:
+          "Cabinet Pierre Abadie, le conseiller fiscal des entreprises au Burkina Faso depuis 1998 : conseil fiscal, droit social, expertise comptable et audit à Ouagadougou.",
+      },
+      pages: {
+        '/qui-sommes-nous': { title: 'Qui sommes-nous ?', description: "Cabinet d'expertise comptable et de conseil basé à Ouagadougou depuis 1998, fondé par Pierre Abadie, expert-comptable et expert fiscal." },
+        '/conseil-fiscal': { title: 'Conseil fiscal au Burkina Faso', description: 'Optimisation et sécurisation fiscale, assistance au contrôle, fiscalité internationale : le conseil fiscal des entreprises au Burkina Faso.' },
+        '/conseiller-droit-social': { title: 'Conseil en droit social', description: 'Contrats de travail, conformité, gestion des conflits, paie et charges sociales : le conseil en droit du travail burkinabè.' },
+        '/expertise-comptable': { title: 'Expertise comptable et audit', description: "Tenue et révision comptable SYSCOHADA, états financiers et missions d'audit au Burkina Faso." },
+        '/nos-clients': { title: 'Nos clients et correspondants', description: 'Les entreprises, institutions et cabinets internationaux qui font confiance au Cabinet Pierre Abadie.' },
+        '/nos-ouvrages': { title: 'Nos ouvrages', description: 'Réglementation fiscale, douanière, minière et du travail, jurisprudence fiscale : les ouvrages de référence du Cabinet Pierre Abadie.' },
+        '/nos-actions-presse-et-tv': { title: 'Actions presse & TV', description: 'Les articles de presse consacrés aux interventions, formations et publications du Cabinet Pierre Abadie.' },
+        '/nos-posts': { title: 'Nos posts', description: 'Analyses et fiches pratiques du Cabinet Pierre Abadie sur la fiscalité et le droit des affaires au Burkina Faso.' },
+        '/nous-rejoindre': { title: 'Nous rejoindre', description: 'Rejoignez une équipe pluridisciplinaire d’expertise comptable et de conseil juridique à Ouagadougou.' },
+        '/nous-ecrire': { title: 'Nous écrire', description: 'Contactez le Cabinet Pierre Abadie pour toute question de fiscalité, de droit social ou d’expertise comptable.' },
+        '/nos-coordonnees': { title: 'Nos coordonnées', description: 'Adresse, téléphone, WhatsApp et e-mail du Cabinet Pierre Abadie à Ouagadougou, Burkina Faso.' },
+        '/mentions-legales': { title: 'Mentions légales', description: 'Mentions légales du site du Cabinet Pierre Abadie.' },
+        '/politique-de-confidentialite': { title: 'Politique de confidentialité', description: 'Traitement des données personnelles et cookies sur le site du Cabinet Pierre Abadie.' },
+      },
+      notFound: 'Page introuvable',
     },
   },
 
@@ -387,11 +441,21 @@ export const messages = {
       home: 'Home',
       readMore: 'Learn more',
       contact: 'Contact us',
+      skip: 'Skip to main content',
+      newTab: '(new tab)',
+      breadcrumb: 'Breadcrumb',
     },
     header: {
       tagline: 'Advisory • Tax • Audit',
       ecrire: 'Contact us',
       banner: 'The adviser to international companies established in Burkina Faso',
+      mainNav: 'Main navigation',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      lang: 'Site language',
+      langNames: { fr: 'Français', en: 'English' },
+      phone: 'Tel.',
+      socials: 'Social media',
     },
     nav: {
       cabinet: 'The Firm',
@@ -401,7 +465,8 @@ export const messages = {
       presse: 'Press & TV',
       posts: 'Our posts',
       qui: 'Who we are',
-      actu: 'Firm News',
+      legal: 'Legal notice',
+      privacy: 'Privacy policy',
       rejoindre: 'Join us',
       ecrire: 'Contact us',
       coord: 'Contact details',
@@ -418,6 +483,11 @@ export const messages = {
       ],
       ctaMore: 'Learn more',
       ctaContact: 'Contact us',
+      label: 'Presentation slideshow',
+      pause: 'Pause the slideshow',
+      play: 'Resume the slideshow',
+      slide: 'Show slide',
+      coverAlt: 'Book by Cabinet Pierre Abadie',
     },
     stats: [
       { value: '1998', label: 'Established in Burkina Faso' },
@@ -469,10 +539,15 @@ export const messages = {
       title: 'Our books',
       text: 'A reference body of work on taxation, law and regulation in Burkina Faso and the OHADA area.',
       all: 'All our books',
+      enlarge: 'Enlarge the book visual',
+      close: 'Close',
     },
     testimonials: {
       eyebrow: 'Testimonials',
       title: 'They trust us',
+      prev: 'Previous testimonial',
+      next: 'Next testimonial',
+      goTo: 'Show testimonial',
       items: [
         { role: 'Tax Advisory', text: 'I am extremely satisfied with the services provided by Cabinet Pierre Abadie. Their tax advisory expertise and constant support have enabled me to optimise my tax position and make better-informed financial decisions. I highly recommend them to any company looking for quality tax advice.' },
         { role: 'Accounting', text: 'I am delighted with the accounting services provided by the firm. Their competent and dedicated team has handled my accounts with precision and professionalism. Thanks to them, I gained a clear view of my financial situation and made strategic decisions accordingly. I recommend them without hesitation.' },
@@ -489,18 +564,19 @@ export const messages = {
       title: 'Our clients',
       text: 'Cabinet Pierre Abadie has clients across the five continents.',
       all: 'All our references',
+      pause: 'Pause the logo carousel',
+      play: 'Resume the logo carousel',
     },
     footer: {
       tagline:
         'The tax adviser to businesses in Burkina Faso. An accounting and advisory firm based in Burkina Faso since 1998, serving international companies across the five continents.',
       navTitle: 'Navigation',
       contactTitle: 'Contact',
-      location: '143 rue 4.107, Ouagadougou, Burkina Faso',
       coord: 'Contact details',
       ecrire: 'Contact us',
       rejoindre: 'Join us',
+      whatsapp: 'WhatsApp',
       rights: 'All rights reserved.',
-      note: 'A faithful reproduction of an archived site — built for demonstration purposes.',
     },
     cta: {
       title: 'Need tailored support?',
@@ -555,122 +631,92 @@ export const messages = {
       ctaTitle: 'Would you like to obtain a book?',
       ctaText: 'Contact the firm for availability and ordering details.',
     },
-    actualites: {
-      subtitle: 'The latest information and analysis from our experts.',
-      readMore: 'Read more',
-      back: 'Back to news',
-      publishedOn: 'Published on',
-      moreTitle: 'More news',
-      posts: [
-        {
-          slug: 'loi-de-finances-mesures-entreprises',
-          tag: 'Taxation',
-          date: '12 February 2024',
-          title: 'Finance Act: the main measures for businesses',
-          excerpt: 'An overview of the tax changes applicable to companies in Burkina Faso and their practical impact.',
-          body: [
-            'Every Finance Act reshapes part of the tax landscape for companies operating in Burkina Faso. Beyond the rates themselves, it is usually the reporting obligations and audit procedures that carry the heaviest practical consequences for finance departments.',
-            'Our teams highlight three areas to watch: the treatment and substantiation of deductible expenses, withholding tax on services rendered by non-residents, and the instalment calendar, which drives the calculation of penalties in the event of late payment.',
-            'For international groups, transfer pricing documentation and its interaction with the tax treaties signed by Burkina Faso remain the primary risk area during a tax audit.',
-            'Cabinet Pierre Abadie supports its clients in interpreting these measures, updating their internal procedures and securing their tax positions. Our detailed analysis is reflected and updated in our reference publications.',
-          ],
-        },
-        {
-          slug: 'reglementation-du-travail-ce-qui-change',
-          tag: 'Labour law',
-          date: '28 January 2024',
-          title: 'Labour regulations: what changes this year',
-          excerpt: 'Recent developments in employment law and best practices to stay compliant.',
-          body: [
-            'Burkinabè labour law evolves regularly, driven by regulations, sector-level collective agreements and the case law of labour courts.',
-            'The most sensitive areas concern the form and duration of employment contracts, overtime management, social security filings and termination procedures, whose formal requirements are a frequent source of litigation.',
-            'Our recommendation remains unchanged: audit contracts and payslips periodically, formalise disciplinary procedures and keep a written record of exchanges with employee representatives.',
-            "The firm's labour law department assists employers throughout, from compliance audits to representation in disputes. These topics are covered in detail in our publication on labour regulations.",
-          ],
-        },
-        {
-          slug: 'cabinet-renforce-equipe-pluridisciplinaire',
-          tag: 'Firm',
-          date: '9 January 2024',
-          title: 'Cabinet Pierre Abadie strengthens its multidisciplinary team',
-          excerpt: 'New staff join our accounting and legal advisory departments.',
-          body: [
-            'The firm continues to strengthen its teams in order to support the growth of its clients in Burkina Faso and across the sub-region.',
-            'New staff are joining the accounting, tax advisory and labour law departments. This multidisciplinary set-up allows a single matter to be handled from its accounting, tax and legal angles without changing contact person.',
-            'It also supports our research and publishing activity, which produces the books and handbooks the firm releases each year on taxation, regulation and business law.',
-            'Spontaneous applications remain welcome and are reviewed throughout the year.',
-          ],
-        },
-      ],
-    },
     presse: {
       subtitle: 'Cabinet Pierre Abadie regularly appears in the media.',
-      appearances: [
-        { media: 'National television', title: 'Interview: business taxation in Burkina Faso' },
-        { media: 'Business press', title: 'Op-ed: optimising your tax burden lawfully' },
-        { media: 'Radio', title: 'Show: understanding Burkinabè labour law' },
-      ],
+      intro:
+        'Press coverage of the firm’s talks, training sessions and publications. Every article can be read online and downloaded as a PDF (articles are in French).',
+      readMore: 'Read the article',
+      back: 'Back to Press & TV',
+      moreTitle: 'More articles',
       theyTalked: 'They talked about us',
     },
     postsPage: {
-      subtitle: 'The firm\u2019s publications: our books, handbooks and annotated collections of legal texts.',
+      subtitle: 'The firm’s analyses and practical guides on taxation and business law in Burkina Faso.',
       intro:
-        'Cabinet Pierre Abadie runs a continuous publishing activity on taxation, regulation and business law in Burkina Faso. Every publication is written by our teams, based on the official texts and on our day-to-day practice with businesses.',
-      allBooks: 'See all our publications',
-      readBook: 'Discover the book',
-      followTitle: 'Follow the firm\u2019s publications',
-      followText:
-        'Our releases, updates and analysis are shared on our social media channels.',
-      items: [
+        'Cabinet Pierre Abadie regularly shares its analysis of tax and legal developments. Every post can be read online and downloaded (posts are in French).',
+      readMore: 'Read the post',
+      back: 'Back to posts',
+      moreTitle: 'More posts',
+      followTitle: 'Follow the firm’s publications',
+      followText: 'Our releases, updates and analysis are shared on our social media channels.',
+    },
+    doc: {
+      publishedOn: 'Published on',
+      openPdf: 'Open the PDF',
+      download: 'Download the PDF',
+      pdfTitle: 'PDF document',
+      pdfHint: 'If the document does not display properly, open it in a new tab.',
+      frenchOnly: 'This document is available in French only.',
+      fullText: 'Full text (in French)',
+    },
+    legal: {
+      subtitle: 'Information about the publisher and host of this website.',
+      publisherTitle: 'Publisher',
+      fields: {
+        name: 'Name',
+        form: 'Legal form',
+        address: 'Registered office',
+        phone: 'Phone',
+        email: 'Email',
+        rccm: 'Trade register (RCCM)',
+        ifu: 'Tax ID (IFU)',
+        publicationDirector: 'Publication director',
+      },
+      hostTitle: 'Hosting',
+      host: 'Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, United States — vercel.com',
+      ipTitle: 'Intellectual property',
+      ip: 'All content on this site (texts, book visuals, logos, documents) is the property of Cabinet Pierre Abadie or of their respective authors. Any reproduction without prior permission is prohibited. Reproduced press articles remain the property of the media that published them.',
+      dataTitle: 'Personal data',
+      dataText: 'How personal data is processed is described in our',
+    },
+    privacy: {
+      subtitle: 'How Cabinet Pierre Abadie handles the information you send us.',
+      updated: 'Last updated: September 2026',
+      sections: [
         {
-          img: '4-Memento-Fiscal-BF_Page_1-212x300.jpg',
-          tag: 'Handbook',
-          date: 'Updated yearly',
-          title: 'Burkina Faso Tax Handbook',
-          excerpt:
-            'All taxes and duties applicable to businesses, presented tax by tax, together with filing obligations and payment deadlines.',
+          title: 'Data controller',
+          text: ['The data controller is Cabinet Pierre Abadie, whose details are given in the legal notice.'],
         },
         {
-          img: '220206-couv-REGL-FISCALE-2022-page-1_Page_1-212x300.jpg',
-          tag: 'Regulation',
-          date: 'Consolidated edition',
-          title: 'Tax regulations',
-          excerpt:
-            'The General Tax Code and its implementing texts, consolidated and annotated in the light of the tax authorities\u2019 practice.',
+          title: 'Data collected',
+          text: [
+            'The “Contact us” form does not send any data to our servers: it prepares an email in your own email app (name, email address, subject and message). You remain free to send it or not.',
+            'Data you send us by email, phone or WhatsApp is used solely to answer your request, follow up on our relationship and, where relevant, review your application.',
+          ],
         },
         {
-          img: '180901-Couv-Reglementation-du-Travail_Page_1-212x300.jpg',
-          tag: 'Labour law',
-          date: 'Consolidated edition',
-          title: 'Labour regulations',
-          excerpt:
-            'The Labour Code, collective agreements and social security texts gathered in a single volume for employers and HR departments.',
+          title: 'Retention period',
+          text: ['Exchanges are kept for as long as needed to handle your request, then for the duration of the business relationship. Unsuccessful applications are kept for no more than two years.'],
         },
         {
-          img: '24-Reglementation-du-secteur-MINIER-BF-en-FR_Page_1-212x300.jpg',
-          tag: 'Mining sector',
-          date: 'Latest release',
-          title: 'Mining sector regulations',
-          excerpt:
-            'The legal, tax and customs regime applicable to mining titles, subcontractors and exploration companies in Burkina Faso.',
+          title: 'Recipients',
+          text: ['Your data is intended solely for the firm’s staff. It is never sold or passed on to third parties.'],
         },
         {
-          img: '150422-Couv-Fiscalite-Internationale_Page_1-211x300.jpg',
-          tag: 'International tax',
-          date: 'Reference work',
-          title: 'International taxation',
-          excerpt:
-            'Tax treaties, withholding taxes and transfer pricing: the rules applicable to flows between Burkina Faso and abroad.',
+          title: 'Your rights',
+          text: [
+            'Under Law no. 001-2021/AN of 30 March 2021 on the protection of individuals with regard to the processing of personal data, you have the right to access, rectify, object to and erase your data. To exercise these rights, write to us at the address below. You may also contact the Commission de l’informatique et des libertés (CIL).',
+          ],
         },
         {
-          img: 'Couv-Reglementation-douaniere-tome-I_Page_1-204x300.jpg',
-          tag: 'Customs',
-          date: 'Volume I',
-          title: 'Customs regulations',
-          excerpt:
-            'Customs regimes, customs valuation and disputes: a working tool for importers, exporters and freight forwarders.',
+          title: 'Cookies',
+          text: [
+            'This site uses no analytics or advertising cookies and sets no cookies while you browse, which is why no consent banner is displayed.',
+            'Two third-party contents load only on request or in privacy-friendly mode: the Google Maps map on the “Contact details” page (shown only after you click, at which point Google may set cookies) and the YouTube presentation video (embedded in “youtube-nocookie” mode).',
+          ],
         },
       ],
+      contact: 'For any question about your data:',
     },
     rejoindre: {
       subtitle: 'Join a rigorous and passionate team serving businesses.',
@@ -694,11 +740,11 @@ export const messages = {
       heading: 'Contact the firm',
       lead: 'Tell us about your needs and we will get back to you as soon as possible.',
       addressLabel: 'Address',
-      address: '143 rue 4.107, Ouagadougou, Burkina Faso',
       emailLabel: 'Email',
       phoneLabel: 'Phone',
-      phone: CONTACT_PHONE,
+      whatsappLabel: 'WhatsApp',
       subjects: ['Tax advisory', 'Labour law advisory', 'Accounting & audit', 'Recruitment', 'Other'],
+      required: 'Fields marked with an asterisk (*) are required.',
       fName: 'Full name',
       fNamePh: 'Your name',
       fEmail: 'Email',
@@ -707,26 +753,60 @@ export const messages = {
       fMessage: 'Message',
       fMessagePh: 'Describe your needs…',
       send: 'Send message',
+      sendHint: 'The button opens your email app with the message pre-filled.',
+      privacyNote: 'Your information is only used to answer your request.',
+      privacyLink: 'Learn more',
       errName: 'Please enter your name.',
-      errEmail: 'Please enter a valid email address.',
+      errEmail: 'Please enter a valid email address, for example name@company.com.',
       errMessage: 'Please write your message.',
+      errSummary: 'The form contains errors. Please correct them.',
       sentTitle: 'Message ready to send',
       sentText: 'Your email app has just opened with the message pre-filled. If nothing happened, write to us directly at',
       again: 'Write another message',
     },
     coord: {
       subtitle: 'Find Cabinet Pierre Abadie in Ouagadougou.',
-      cards: [
-        { icon: 'pin', title: 'Address', lines: ['Cabinet Pierre Abadie', '143 rue 4.107, Ouagadougou, Burkina Faso'] },
-        { icon: 'mail', title: 'Email', lines: [CONTACT_EMAIL] },
-        { icon: 'phone', title: 'Phone', lines: [CONTACT_PHONE] },
-      ],
-      mapTitle: 'Ouagadougou map',
+      addressTitle: 'Address',
+      phoneTitle: 'Phone',
+      whatsappTitle: 'WhatsApp',
+      emailTitle: 'Email',
+      call: 'Call',
+      whatsapp: 'Message on WhatsApp',
+      mail: 'Send an email',
+      directions: 'Get directions',
+      openMaps: 'View on Google Maps',
+      mapTitle: 'Map: Cabinet Pierre Abadie, 55 rue 3.37, Ouagadougou',
+      mapNotice: 'The map is provided by Google Maps. It is only displayed on request, as Google may set cookies.',
+      showMap: 'Show the map',
     },
     notfound: {
       title: 'Page not found',
-      text: 'The page you are looking for does not exist or has been moved.',
+      text: 'The page you are looking for does not exist or has been moved. Here are some pages that may interest you:',
       back: 'Back to home',
+    },
+    seo: {
+      siteName: 'Cabinet Pierre Abadie',
+      default: {
+        title: 'Cabinet Pierre Abadie | Tax adviser to businesses in Burkina Faso',
+        description:
+          'Cabinet Pierre Abadie, tax adviser to businesses in Burkina Faso since 1998: tax advisory, labour law, accounting and audit in Ouagadougou.',
+      },
+      pages: {
+        '/qui-sommes-nous': { title: 'Who we are', description: 'An accounting and advisory firm based in Ouagadougou since 1998, founded by Pierre Abadie, chartered accountant and tax expert.' },
+        '/conseil-fiscal': { title: 'Tax advisory in Burkina Faso', description: 'Tax optimisation and security, audit assistance, international taxation: tax advisory for businesses in Burkina Faso.' },
+        '/conseiller-droit-social': { title: 'Labour law advisory', description: 'Employment contracts, compliance, dispute management, payroll and social charges: advice on Burkinabè labour law.' },
+        '/expertise-comptable': { title: 'Accounting and audit', description: 'SYSCOHADA bookkeeping and review, financial statements and audit engagements in Burkina Faso.' },
+        '/nos-clients': { title: 'Our clients and correspondents', description: 'The companies, institutions and international firms that trust Cabinet Pierre Abadie.' },
+        '/nos-ouvrages': { title: 'Our books', description: 'Tax, customs, mining and labour regulations, tax case law: the reference books published by Cabinet Pierre Abadie.' },
+        '/nos-actions-presse-et-tv': { title: 'Press & TV', description: 'Press coverage of the talks, training sessions and publications of Cabinet Pierre Abadie.' },
+        '/nos-posts': { title: 'Our posts', description: 'Analysis and practical guides by Cabinet Pierre Abadie on taxation and business law in Burkina Faso.' },
+        '/nous-rejoindre': { title: 'Join us', description: 'Join a multidisciplinary accounting and legal advisory team in Ouagadougou.' },
+        '/nous-ecrire': { title: 'Contact us', description: 'Contact Cabinet Pierre Abadie about taxation, labour law or accounting.' },
+        '/nos-coordonnees': { title: 'Contact details', description: 'Address, phone, WhatsApp and email of Cabinet Pierre Abadie in Ouagadougou, Burkina Faso.' },
+        '/mentions-legales': { title: 'Legal notice', description: 'Legal notice for the Cabinet Pierre Abadie website.' },
+        '/politique-de-confidentialite': { title: 'Privacy policy', description: 'Personal data processing and cookies on the Cabinet Pierre Abadie website.' },
+      },
+      notFound: 'Page not found',
     },
   },
 }
