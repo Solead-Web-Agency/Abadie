@@ -3,9 +3,11 @@ import CTA from '../components/CTA'
 import Icon from '../components/Icon'
 import { Link } from 'react-router-dom'
 import { useLang } from '../i18n/useLang'
+import { usePageMeta } from '../i18n/usePageMeta'
 
 export default function NousRejoindre() {
   const { t, withLang } = useLang()
+  usePageMeta()
   return (
     <>
       <PageBanner

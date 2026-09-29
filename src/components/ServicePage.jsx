@@ -1,8 +1,10 @@
 import PageBanner from './PageBanner'
 import CTA from './CTA'
 import Icon from './Icon'
+import { usePageMeta } from '../i18n/usePageMeta'
 
 export default function ServicePage({ title, subtitle, intro, items, icon }) {
+  usePageMeta()
   return (
     <>
       <PageBanner title={title} subtitle={subtitle} crumb={title} />
@@ -22,7 +24,7 @@ export default function ServicePage({ title, subtitle, intro, items, icon }) {
                 key={it.title}
                 className="rounded-2xl border border-black/5 bg-gray-50 p-6 transition-shadow hover:shadow-md"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-pa-green text-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-pa-green text-white" aria-hidden="true">
                   <Icon name="check" className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 font-bold">{it.title}</h3>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // Renders a partner/client logo, falling back to a styled text chip
-// when the underlying image is missing (some archive assets failed to fetch).
+// when the image cannot be loaded.
 export default function Logo({ img, name, className = '' }) {
   const [failed, setFailed] = useState(false)
 

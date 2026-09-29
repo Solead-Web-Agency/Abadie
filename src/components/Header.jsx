@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { nav } from '../data/nav'
 import { useLang } from '../i18n/useLang'
 import Icon from './Icon'
@@ -8,51 +8,71 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   CONTACT_PHONE_HREF,
-  CONTACT_ADDRESS,
+  CONTACT_ADDRESS_SHORT,
+  MAPS_SEARCH_HREF,
+  WHATSAPP_HREF,
 } from '../i18n/translations'
 
-function TopLink({ item, onNavigate }) {
-  const [open, setOpen] = useState(false)
+const topLinkClass = (active) =>
+  `px-3 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${
+    active ? 'text-pa-green-dark underline decoration-2 underline-offset-8' : 'text-pa-ink hover:text-pa-green-dark'
+  }`
+
+// Desktop menu entry. Only one dropdown can be open at a time: the open state
+// lives in <Header> (openId) and is passed down.
+function TopLink({ item, open, onOpen, onClose }) {
   const location = useLocation()
   const { t, withLang } = useLang()
+  const wrapRef = useRef(null)
+  const buttonRef = useRef(null)
 
   if (!item.children) {
     return (
-      <NavLink
-        to={withLang(item.to)}
-        end={item.to === '/'}
-        onClick={onNavigate}
-        className={({ isActive }) =>
-          `px-3 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${
-            isActive ? 'text-pa-green' : 'text-pa-ink hover:text-pa-green'
-          }`
-        }
-      >
+      <NavLink to={withLang(item.to)} end={item.to === '/'} className={({ isActive }) => topLinkClass(isActive)}>
         {t.nav[item.id]}
       </NavLink>
     )
   }
 
   const childActive = item.children.some((c) => withLang(c.to) === location.pathname)
+  const menuId = `submenu-${item.id}`
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Escape' && open) {
+      e.stopPropagation()
+      onClose()
+      buttonRef.current?.focus()
+    }
+  }
+
+  // Close when keyboard focus leaves the entry (Tab past the last link).
+  const onBlur = (e) => {
+    if (open && !wrapRef.current?.contains(e.relatedTarget)) onClose()
+  }
 
   return (
     <div
+      ref={wrapRef}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={onOpen}
+      onMouseLeave={onClose}
+      onKeyDown={onKeyDown}
+      onBlur={onBlur}
     >
       <button
+        ref={buttonRef}
         type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`flex items-center gap-1 px-3 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${
-          childActive ? 'text-pa-green' : 'text-pa-ink hover:text-pa-green'
-        }`}
+        aria-expanded={open}
+        aria-controls={menuId}
+        onClick={() => (open ? onClose() : onOpen())}
+        className={`flex items-center gap-1 ${topLinkClass(childActive)}`}
       >
         {t.nav[item.id]}
         <svg
           className={`h-3 w-3 transition-transform ${open ? 'rotate-180' : ''}`}
           viewBox="0 0 20 20"
           fill="currentColor"
+          aria-hidden="true"
         >
           <path
             fillRule="evenodd"
@@ -61,92 +81,140 @@ function TopLink({ item, onNavigate }) {
           />
         </svg>
       </button>
-      {open && (
-        <div className="absolute left-0 top-full z-30 min-w-60 rounded-b-md border-t-2 border-pa-green bg-white py-2 shadow-xl">
-          {item.children.map((c) => (
+      <ul
+        id={menuId}
+        hidden={!open}
+        className="absolute left-0 top-full z-30 min-w-60 rounded-b-md border-t-2 border-pa-green bg-white py-2 shadow-xl"
+      >
+        {item.children.map((c) => (
+          <li key={c.to}>
             <NavLink
-              key={c.to}
               to={withLang(c.to)}
-              onClick={() => {
-                setOpen(false)
-                onNavigate?.()
-              }}
+              onClick={onClose}
               className={({ isActive }) =>
                 `block px-4 py-2 text-sm transition-colors ${
                   isActive
-                    ? 'bg-pa-green/10 text-pa-green'
+                    ? 'bg-pa-green/10 font-semibold text-pa-green'
                     : 'text-pa-gray hover:bg-pa-green/5 hover:text-pa-green'
                 }`
               }
             >
               {t.nav[c.id]}
             </NavLink>
-          ))}
-        </div>
-      )}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [openId, setOpenId] = useState(null)
   const { lang, t, withLang, pathInLang } = useLang()
-  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const navRef = useRef(null)
+  const burgerRef = useRef(null)
 
-  const switchLang = (l) => {
-    navigate(pathInLang(l))
+  // Close every menu when the page changes.
+  const [lastPath, setLastPath] = useState(pathname)
+  if (lastPath !== pathname) {
+    setLastPath(pathname)
+    setOpenId(null)
     setMobileOpen(false)
   }
+
+  // Escape closes the mobile menu; a click outside closes the desktop dropdown.
+  useEffect(() => {
+    if (!mobileOpen && !openId) return
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return
+      if (mobileOpen) {
+        setMobileOpen(false)
+        burgerRef.current?.focus()
+      }
+      setOpenId(null)
+    }
+    const onPointer = (e) => {
+      if (openId && !navRef.current?.contains(e.target)) setOpenId(null)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onPointer)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onPointer)
+    }
+  }, [mobileOpen, openId])
 
   return (
     <header className="relative z-40 shadow-sm">
       {/* Tier 1 — red contact bar */}
-      <div className="bg-pa-red text-white">
+      <div className="focus-light bg-pa-red text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-1 px-4 py-1.5 text-xs sm:justify-between">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-            <span className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+            <a
+              href={MAPS_SEARCH_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 hover:underline"
+            >
               <Icon name="pin" className="h-3.5 w-3.5" />
-              {CONTACT_ADDRESS}
-            </span>
-            <a href={`tel:${CONTACT_PHONE_HREF}`} className="flex items-center gap-1.5 hover:text-white/80">
-              <Icon name="phone" className="h-3.5 w-3.5" />
-              Tél.: {CONTACT_PHONE}
+              {CONTACT_ADDRESS_SHORT}
+              <span className="sr-only"> {t.common.newTab}</span>
             </a>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-1.5 hover:text-white/80">
+            <a href={`tel:${CONTACT_PHONE_HREF}`} className="flex items-center gap-1.5 hover:underline">
+              <Icon name="phone" className="h-3.5 w-3.5" />
+              {t.header.phone} {CONTACT_PHONE}
+            </a>
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 hover:underline"
+            >
+              <Icon name="whatsapp" className="h-3.5 w-3.5" />
+              WhatsApp
+              <span className="sr-only"> {t.common.newTab}</span>
+            </a>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-1.5 hover:underline">
               <Icon name="mail" className="h-3.5 w-3.5" />
               {CONTACT_EMAIL}
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
+            <ul className="flex items-center gap-2" aria-label={t.header.socials}>
               {SOCIALS.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={s.name}
-                  className="opacity-90 transition-opacity hover:opacity-100"
-                >
-                  <Icon name={s.icon} className="h-4 w-4" />
-                </a>
+                <li key={s.name}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${s.name} ${t.common.newTab}`}
+                    className="block opacity-90 transition-opacity hover:opacity-100"
+                  >
+                    <Icon name={s.icon} className="h-4 w-4" />
+                  </a>
+                </li>
               ))}
-            </div>
-            <span className="h-3 w-px bg-white/30" />
-            <div className="flex items-center gap-1 font-semibold">
+            </ul>
+            <span className="h-3 w-px bg-white/40" aria-hidden="true" />
+            <nav aria-label={t.header.lang} className="flex items-center gap-1 font-semibold">
               {['fr', 'en'].map((l) => (
-                <button
+                <Link
                   key={l}
-                  type="button"
-                  onClick={() => switchLang(l)}
+                  to={pathInLang(l)}
+                  lang={l}
+                  hrefLang={l}
+                  aria-label={t.header.langNames[l]}
+                  aria-current={lang === l ? 'true' : undefined}
                   className={`rounded px-1.5 py-0.5 uppercase transition-colors ${
-                    lang === l ? 'bg-white text-pa-red' : 'text-white/80 hover:text-white'
+                    lang === l ? 'bg-white text-pa-red' : 'text-white hover:underline'
                   }`}
                 >
                   {l}
-                </button>
+                </Link>
               ))}
-            </div>
+            </nav>
           </div>
         </div>
       </div>
@@ -154,17 +222,25 @@ export default function Header() {
       {/* Tier 2 — logo + menu */}
       <div className="bg-pa-yellow">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5">
-          <Link to={withLang('/')} className="flex items-center" onClick={() => setMobileOpen(false)}>
+          <Link to={withLang('/')} className="flex items-center">
             <img
-              src="/images/header-sf.png"
-              alt="Cabinet Pierre Abadie"
+              src="/images/logo-cabinet.webp"
+              alt={`Cabinet Pierre Abadie — ${t.common.home}`}
+              width="190"
+              height="44"
               className="h-11 w-auto"
             />
           </Link>
 
-          <nav className="hidden items-center lg:flex">
+          <nav ref={navRef} aria-label={t.header.mainNav} className="hidden items-center lg:flex">
             {nav.map((item) => (
-              <TopLink key={item.id} item={item} />
+              <TopLink
+                key={item.id}
+                item={item}
+                open={openId === item.id}
+                onOpen={() => setOpenId(item.id)}
+                onClose={() => setOpenId((id) => (id === item.id ? null : id))}
+              />
             ))}
           </nav>
 
@@ -176,12 +252,15 @@ export default function Header() {
               {t.header.ecrire}
             </Link>
             <button
+              ref={burgerRef}
               type="button"
-              aria-label="Menu"
+              aria-label={mobileOpen ? t.header.closeMenu : t.header.openMenu}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
               onClick={() => setMobileOpen((v) => !v)}
               className="rounded-md p-2 text-pa-ink lg:hidden"
             >
-              <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 {mobileOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -200,41 +279,49 @@ export default function Header() {
         </p>
       </div>
 
-      {mobileOpen && (
-        <div className="border-t border-black/5 bg-white lg:hidden">
-          <nav className="mx-auto max-w-7xl px-4 py-3">
+      <div id="mobile-menu" hidden={!mobileOpen} className="border-t border-black/5 bg-white lg:hidden">
+        <nav aria-label={t.header.mainNav} className="mx-auto max-w-7xl px-4 py-3">
+          <ul>
             {nav.map((item) =>
               item.children ? (
-                <div key={item.id} className="py-1">
+                <li key={item.id} className="py-1">
                   <p className="px-1 pt-2 text-xs font-bold uppercase tracking-wider text-pa-green">
                     {t.nav[item.id]}
                   </p>
-                  {item.children.map((c) => (
-                    <NavLink
-                      key={c.to}
-                      to={withLang(c.to)}
-                      onClick={() => setMobileOpen(false)}
-                      className="block px-3 py-2 text-sm text-pa-gray"
-                    >
-                      {t.nav[c.id]}
-                    </NavLink>
-                  ))}
-                </div>
+                  <ul>
+                    {item.children.map((c) => (
+                      <li key={c.to}>
+                        <NavLink
+                          to={withLang(c.to)}
+                          className={({ isActive }) =>
+                            `block px-3 py-2 text-sm ${isActive ? 'font-semibold text-pa-green' : 'text-pa-gray'}`
+                          }
+                        >
+                          {t.nav[c.id]}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
               ) : (
-                <NavLink
-                  key={item.to}
-                  to={withLang(item.to)}
-                  end={item.to === '/'}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-1 py-2 text-sm font-semibold uppercase tracking-wide text-pa-ink"
-                >
-                  {t.nav[item.id]}
-                </NavLink>
+                <li key={item.to}>
+                  <NavLink
+                    to={withLang(item.to)}
+                    end={item.to === '/'}
+                    className={({ isActive }) =>
+                      `block px-1 py-2 text-sm font-semibold uppercase tracking-wide ${
+                        isActive ? 'text-pa-green' : 'text-pa-ink'
+                      }`
+                    }
+                  >
+                    {t.nav[item.id]}
+                  </NavLink>
+                </li>
               )
             )}
-          </nav>
-        </div>
-      )}
+          </ul>
+        </nav>
+      </div>
     </header>
   )
 }

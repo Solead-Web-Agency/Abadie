@@ -3,9 +3,11 @@ import CTA from '../components/CTA'
 import Icon from '../components/Icon'
 import VideoEmbed from '../components/VideoEmbed'
 import { useLang } from '../i18n/useLang'
+import { usePageMeta } from '../i18n/usePageMeta'
 
 export default function QuiSommesNous() {
   const { t } = useLang()
+  usePageMeta()
   const about = t.about
   return (
     <>

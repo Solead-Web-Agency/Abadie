@@ -1,0 +1,317 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/a-propos",
+      "destination": "/qui-sommes-nous",
+      "permanent": true
+    },
+    {
+      "source": "/qui-sommes-nous/:path+",
+      "destination": "/qui-sommes-nous",
+      "permanent": true
+    },
+    {
+      "source": "/conseil-fiscal-burkina-faso",
+      "destination": "/conseil-fiscal",
+      "permanent": true
+    },
+    {
+      "source": "/expert-comptable",
+      "destination": "/expertise-comptable",
+      "permanent": true
+    },
+    {
+      "source": "/contacts",
+      "destination": "/nos-coordonnees",
+      "permanent": true
+    },
+    {
+      "source": "/nos-offres",
+      "destination": "/nous-rejoindre",
+      "permanent": true
+    },
+    {
+      "source": "/formations",
+      "destination": "/qui-sommes-nous",
+      "permanent": true
+    },
+    {
+      "source": "/ouvrages",
+      "destination": "/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/ouvrages/:path*",
+      "destination": "/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/project_category/:path*",
+      "destination": "/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/project_tag/:path*",
+      "destination": "/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/cariboost_files/:path*",
+      "destination": "/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/actualites",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/actualites/:path*",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:path*",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/convention-de-concession-pour-la-gestion-des-factures-normalisees-la-cellule-technique-tient-sa-deuxieme-session-de-lannee-2022",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/gestion-operation-elle-des-regimes-dedition-et-de-securisation-des-factures-normalisees-le-comite-de-suivi-tient-sa-premiere-session",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/lancement-du-portail-esintax-au-centre-sud-les-contribuables-de-la-region-simpregnent-du-portail",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/rencontre-etat-secteur-prive-bobo-dioulasso-les-4-et-5-juillet-2023",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/https-pierreabadie-com-actualites-expert-comptable-conseil-fiscal",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/repab23",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/repab23-expert-comptable",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/fiscalite.html",
+      "destination": "/conseil-fiscal",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/nos-coordonnees",
+      "permanent": true
+    },
+    {
+      "source": "/conseil_juridique.html",
+      "destination": "/conseiller-droit-social",
+      "permanent": true
+    },
+    {
+      "source": "/misscomptable.html",
+      "destination": "/expertise-comptable",
+      "permanent": true
+    },
+    {
+      "source": "/cvtheque.html",
+      "destination": "/nous-rejoindre",
+      "permanent": true
+    },
+    {
+      "source": "/en/who-are-we/home",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/en/who-are-we",
+      "destination": "/en/qui-sommes-nous",
+      "permanent": true
+    },
+    {
+      "source": "/en/tax-advice",
+      "destination": "/en/conseil-fiscal",
+      "permanent": true
+    },
+    {
+      "source": "/en/employment-law-advisor",
+      "destination": "/en/conseiller-droit-social",
+      "permanent": true
+    },
+    {
+      "source": "/en/accounting-expertise",
+      "destination": "/en/expertise-comptable",
+      "permanent": true
+    },
+    {
+      "source": "/en/references",
+      "destination": "/en/nos-clients",
+      "permanent": true
+    },
+    {
+      "source": "/en/training",
+      "destination": "/en/qui-sommes-nous",
+      "permanent": true
+    },
+    {
+      "source": "/en/join-us",
+      "destination": "/en/nous-rejoindre",
+      "permanent": true
+    },
+    {
+      "source": "/en/write-to-us",
+      "destination": "/en/nous-ecrire",
+      "permanent": true
+    },
+    {
+      "source": "/en/our-contact-details",
+      "destination": "/en/nos-coordonnees",
+      "permanent": true
+    },
+    {
+      "source": "/en/our-posts",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/our-works",
+      "destination": "/en/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/en/our-publications",
+      "destination": "/en/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/en/ouvrages",
+      "destination": "/en/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/en/ouvrages/:path*",
+      "destination": "/en/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/en/project_category/:path*",
+      "destination": "/en/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/en/project_tag/:path*",
+      "destination": "/en/nos-ouvrages",
+      "permanent": true
+    },
+    {
+      "source": "/en/news",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/actualites",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/actualites/:path*",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/category/:path*",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/concession-agreement-for-the-management-of-standardized-invoices-the-technical-committee-holds-its-second-session-of-the-year-2022",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/esintax-portal-launched-in-centre-sud-local-taxpayers-get-to-grips-with-the-portal",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/operational-management-of-the-editing-and-securing-of-standardized-invoices-the-monitoring-committee-holds-its-first-session",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/the-state-private-sector-meeting-will-take-place-in-bobo-dioulasso-on-july-4th-and-5th-2023",
+      "destination": "/en/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/author/:path*",
+      "destination": "/en",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(images|documents)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
