@@ -282,6 +282,33 @@ export const messages = {
       frenchOnly: null,
       fullText: 'Texte intégral',
     },
+    consent: {
+      title: 'Vos choix en matière de cookies',
+      text: "Ce site n'utilise ni mesure d'audience ni publicité. Deux contenus tiers peuvent déposer des cookies : la vidéo de présentation (YouTube) et la carte (Google Maps). Ils ne sont chargés qu'avec votre accord, que vous pouvez modifier à tout moment via le lien « Gestion des cookies » en bas de page.",
+      privacyLink: 'Politique de confidentialité',
+      acceptAll: 'Tout accepter',
+      rejectAll: 'Tout refuser',
+      customize: 'Personnaliser',
+      save: 'Enregistrer mes choix',
+      close: 'Fermer',
+      manage: 'Gestion des cookies',
+      necessaryTitle: 'Strictement nécessaire',
+      necessaryText: 'Mémorisation de vos choix pendant 6 mois, dans votre navigateur. Aucun cookie n’est utilisé pour cela.',
+      always: 'Toujours actif',
+      services: {
+        youtube: {
+          title: 'Vidéos YouTube',
+          text: 'Lecture de la vidéo de présentation du Cabinet. YouTube (Google) peut déposer des cookies.',
+        },
+        maps: {
+          title: 'Carte Google Maps',
+          text: "Affichage de la carte sur la page « Nos coordonnées ». Google peut déposer des cookies.",
+        },
+      },
+      videoBlocked: 'Cette vidéo est hébergée par YouTube, qui peut déposer des cookies. Elle ne s’affiche qu’avec votre accord.',
+      videoAccept: 'Accepter et afficher la vidéo',
+      videoLink: 'Voir sur YouTube',
+    },
     legal: {
       subtitle: "Informations relatives à l'éditeur et à l'hébergeur du site.",
       publisherTitle: 'Éditeur du site',
@@ -341,8 +368,9 @@ export const messages = {
         {
           title: 'Cookies',
           text: [
-            "Ce site n'utilise aucun cookie de mesure d'audience ni de publicité, et ne dépose aucun cookie lors de la navigation. C'est pourquoi aucun bandeau de consentement n'est affiché.",
-            "Deux contenus tiers ne se chargent qu'à votre demande ou en mode respectueux de la vie privée : la carte Google Maps de la page « Nos coordonnées » (affichée uniquement après un clic de votre part, Google pouvant alors déposer des cookies) et la vidéo YouTube de présentation (intégrée en mode « youtube-nocookie »).",
+            "Ce site n'utilise aucun outil de mesure d'audience ni de publicité, et ne dépose lui-même aucun cookie.",
+            "Deux contenus tiers peuvent déposer des cookies : la vidéo de présentation hébergée par YouTube et la carte Google Maps de la page « Nos coordonnées ». Ils ne sont chargés qu'après votre accord, recueilli par le bandeau affiché lors de votre première visite ou directement à l'emplacement du contenu.",
+            "Votre choix est conservé 6 mois dans votre navigateur. Vous pouvez le modifier ou retirer votre accord à tout moment via le lien « Gestion des cookies » en bas de chaque page.",
           ],
         },
       ],
@@ -407,8 +435,8 @@ export const messages = {
       openMaps: 'Voir sur Google Maps',
       mapTitle: 'Carte : Cabinet Pierre Abadie, 55 rue 3.37, Ouagadougou',
       mapNotice:
-        "La carte est fournie par Google Maps. Elle ne s'affiche qu'à votre demande, Google pouvant déposer des cookies.",
-      showMap: 'Afficher la carte',
+        "La carte est fournie par Google Maps, qui peut déposer des cookies. Elle ne s'affiche qu'avec votre accord.",
+      showMap: 'Accepter et afficher la carte',
     },
     notfound: {
       title: 'Page introuvable',
@@ -664,6 +692,33 @@ export const messages = {
       frenchOnly: 'This document is available in French only.',
       fullText: 'Full text (in French)',
     },
+    consent: {
+      title: 'Your cookie choices',
+      text: 'This site uses no analytics or advertising. Two third-party contents may set cookies: the presentation video (YouTube) and the map (Google Maps). They only load with your consent, which you can change at any time via the “Cookie settings” link at the bottom of the page.',
+      privacyLink: 'Privacy policy',
+      acceptAll: 'Accept all',
+      rejectAll: 'Reject all',
+      customize: 'Customise',
+      save: 'Save my choices',
+      close: 'Close',
+      manage: 'Cookie settings',
+      necessaryTitle: 'Strictly necessary',
+      necessaryText: 'Remembering your choices for 6 months, in your browser. No cookie is used for this.',
+      always: 'Always on',
+      services: {
+        youtube: {
+          title: 'YouTube videos',
+          text: 'Plays the firm’s presentation video. YouTube (Google) may set cookies.',
+        },
+        maps: {
+          title: 'Google Maps map',
+          text: 'Displays the map on the “Contact details” page. Google may set cookies.',
+        },
+      },
+      videoBlocked: 'This video is hosted by YouTube, which may set cookies. It is only shown with your consent.',
+      videoAccept: 'Accept and show the video',
+      videoLink: 'Watch on YouTube',
+    },
     legal: {
       subtitle: 'Information about the publisher and host of this website.',
       publisherTitle: 'Publisher',
@@ -717,8 +772,9 @@ export const messages = {
         {
           title: 'Cookies',
           text: [
-            'This site uses no analytics or advertising cookies and sets no cookies while you browse, which is why no consent banner is displayed.',
-            'Two third-party contents load only on request or in privacy-friendly mode: the Google Maps map on the “Contact details” page (shown only after you click, at which point Google may set cookies) and the YouTube presentation video (embedded in “youtube-nocookie” mode).',
+            'This site uses no analytics or advertising tools and sets no cookies itself.',
+            'Two third-party contents may set cookies: the presentation video hosted by YouTube and the Google Maps map on the “Contact details” page. They only load after you consent, either through the banner shown on your first visit or directly where the content appears.',
+            'Your choice is kept for 6 months in your browser. You can change it or withdraw your consent at any time via the “Cookie settings” link at the bottom of every page.',
           ],
         },
       ],
@@ -782,8 +838,8 @@ export const messages = {
       directions: 'Get directions',
       openMaps: 'View on Google Maps',
       mapTitle: 'Map: Cabinet Pierre Abadie, 55 rue 3.37, Ouagadougou',
-      mapNotice: 'The map is provided by Google Maps. It is only displayed on request, as Google may set cookies.',
-      showMap: 'Show the map',
+      mapNotice: 'The map is provided by Google Maps, which may set cookies. It is only displayed with your consent.',
+      showMap: 'Accept and show the map',
     },
     notfound: {
       title: 'Page not found',
