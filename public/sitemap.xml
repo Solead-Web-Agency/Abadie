@@ -181,6 +181,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-actions-presse-et-tv/fasozine-etudiants-iam"/>
   </url>
   <url>
+    <loc>https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
+  </url>
+  <url>
+    <loc>https://pierreabadie.com/en/nos-actions-presse-et-tv/code-de-la-communication-interview</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
+  </url>
+  <url>
     <loc>https://pierreabadie.com/nos-actions-presse-et-tv/redressement-fiscal-chefs-d-entreprises</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-actions-presse-et-tv/redressement-fiscal-chefs-d-entreprises"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-actions-presse-et-tv/redressement-fiscal-chefs-d-entreprises"/>
@@ -205,18 +217,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-actions-presse-et-tv/tva-impot-efficace-mais-antisocial"/>
   </url>
   <url>
-    <loc>https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
-  </url>
-  <url>
-    <loc>https://pierreabadie.com/en/nos-actions-presse-et-tv/code-de-la-communication-interview</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-actions-presse-et-tv/code-de-la-communication-interview"/>
-  </url>
-  <url>
     <loc>https://pierreabadie.com/nos-posts</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-posts"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-posts"/>
@@ -239,6 +239,18 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-posts/facture-electronique-certifiee"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-posts/facture-electronique-certifiee"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-posts/facture-electronique-certifiee"/>
+  </url>
+  <url>
+    <loc>https://pierreabadie.com/nos-posts/bail-d-habitation-privee</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-posts/bail-d-habitation-privee"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
+  </url>
+  <url>
+    <loc>https://pierreabadie.com/en/nos-posts/bail-d-habitation-privee</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-posts/bail-d-habitation-privee"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
   </url>
   <url>
     <loc>https://pierreabadie.com/nos-posts/creation-de-societe-recourir-a-un-professionnel</loc>
@@ -275,18 +287,6 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-posts/declaration-des-beneficiaires-effectifs"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-posts/declaration-des-beneficiaires-effectifs"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-posts/declaration-des-beneficiaires-effectifs"/>
-  </url>
-  <url>
-    <loc>https://pierreabadie.com/nos-posts/bail-d-habitation-privee</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-posts/bail-d-habitation-privee"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
-  </url>
-  <url>
-    <loc>https://pierreabadie.com/en/nos-posts/bail-d-habitation-privee</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pierreabadie.com/en/nos-posts/bail-d-habitation-privee"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pierreabadie.com/nos-posts/bail-d-habitation-privee"/>
   </url>
   <url>
     <loc>https://pierreabadie.com/nous-rejoindre</loc>

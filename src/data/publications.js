@@ -3,10 +3,10 @@
 // French; `body` (when present) is the French text rendered as HTML.
 // Body blocks: { h: '…' } heading, { p: '…' } paragraph, { ul: ['…'] } list.
 
-export const press = [
+const pressItems = [
   {
     slug: 'loi-de-finances-2026-cidef',
-    media: "L'Economiste du Faso",
+    media: "L'Économiste du Faso",
     date: '2026-03-02',
     file: '/documents/presse/loi-de-finances-2026-cidef.pdf',
     title: {
@@ -26,7 +26,7 @@ export const press = [
   },
   {
     slug: 'justice-fiscale-securite-des-entreprises',
-    media: "L'Economiste du Faso",
+    media: "L'Économiste du Faso",
     date: '2017-02-06',
     file: '/documents/presse/justice-fiscale-securite-des-entreprises.pdf',
     title: {
@@ -80,7 +80,7 @@ export const press = [
   },
   {
     slug: 'actualite-juridique-et-fiscale-2013-2016',
-    media: "L'Economiste du Faso",
+    media: "L'Économiste du Faso",
     date: '2016-02-08',
     file: '/documents/presse/actualite-juridique-et-fiscale-2013-2016.pdf',
     title: {
@@ -98,7 +98,7 @@ export const press = [
   },
   {
     slug: 'ispp-journee-autour-de-la-fiscalite',
-    media: "L'Economiste du Faso",
+    media: "L'Économiste du Faso",
     date: '2015-11-30',
     file: '/documents/presse/ispp-journee-autour-de-la-fiscalite.pdf',
     title: {
@@ -134,7 +134,7 @@ export const press = [
   },
   {
     slug: 'redressement-fiscal-chefs-d-entreprises',
-    media: "L'Economiste du Faso",
+    media: "L'Économiste du Faso",
     date: '2014-04-07',
     file: '/documents/presse/redressement-fiscal-chefs-d-entreprises.pdf',
     title: {
@@ -152,8 +152,8 @@ export const press = [
   },
   {
     slug: 'tva-impot-efficace-mais-antisocial',
-    media: { fr: 'Presse écrite', en: 'Print press' },
-    date: null,
+    media: '226 Infos',
+    date: '2014-01-14',
     file: '/documents/presse/tva-impot-efficace-mais-antisocial.pdf',
     title: {
       fr: 'Pierre Abadie à propos de la TVA : « C’est un impôt efficace, mais antisocial »',
@@ -170,8 +170,8 @@ export const press = [
   },
   {
     slug: 'code-de-la-communication-interview',
-    media: 'Interview',
-    date: null,
+    media: "L'Économiste du Faso",
+    date: '2014-11-13',
     file: null,
     title: {
       fr: 'Vient de paraître : le Code de la communication & des droits littéraires et artistiques',
@@ -216,11 +216,11 @@ export const press = [
   },
 ]
 
-export const posts = [
+const postItems = [
   {
     slug: 'facture-electronique-certifiee',
     media: 'Cabinet Pierre Abadie',
-    date: null,
+    date: '2025-02-25',
     file: '/documents/posts/facture-electronique-certifiee.pdf',
     title: {
       fr: 'Facture électronique certifiée (FEC) au Burkina Faso',
@@ -240,7 +240,7 @@ export const posts = [
   {
     slug: 'creation-de-societe-recourir-a-un-professionnel',
     media: 'Cabinet Pierre Abadie',
-    date: null,
+    date: '2022-08-03',
     file: null,
     title: {
       fr: 'Pourquoi recourir à un professionnel pour la création de sa société ?',
@@ -272,7 +272,7 @@ export const posts = [
   },
   {
     slug: 'contribution-fonciere',
-    media: "L'Economiste du Faso",
+    media: "L'Économiste du Faso",
     date: '2022-03-28',
     file: '/documents/posts/contribution-fonciere.pdf',
     title: {
@@ -290,7 +290,7 @@ export const posts = [
   },
   {
     slug: 'declaration-des-beneficiaires-effectifs',
-    media: "L'Economiste du Faso",
+    media: "L'Économiste du Faso",
     date: '2022-03-07',
     file: '/documents/posts/declaration-des-beneficiaires-effectifs.pdf',
     title: {
@@ -309,7 +309,7 @@ export const posts = [
   {
     slug: 'bail-d-habitation-privee',
     media: 'Cabinet Pierre Abadie',
-    date: null,
+    date: '2022-08-23',
     file: '/documents/posts/bail-d-habitation-privee.pdf',
     title: {
       fr: "Bon à savoir : la loi n°103-CNT/2015 portant bail d'habitation privée au Burkina Faso",
@@ -325,3 +325,8 @@ export const posts = [
     },
   },
 ]
+
+// Most recent first.
+const byDateDesc = (a, b) => b.date.localeCompare(a.date)
+export const press = pressItems.sort(byDateDesc)
+export const posts = postItems.sort(byDateDesc)
