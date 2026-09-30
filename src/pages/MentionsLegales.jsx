@@ -11,13 +11,13 @@ import {
 } from '../i18n/translations'
 
 export default function MentionsLegales() {
-  const { t, withLang } = useLang()
+  const { t, lang, withLang } = useLang()
   const l = t.legal
   usePageMeta()
 
   const rows = [
     ['name', LEGAL.name],
-    ['form', LEGAL.form],
+    ['form', LEGAL.form?.[lang]],
     ['address', CONTACT_ADDRESS],
     ['phone', <a key="p" href={`tel:${CONTACT_PHONE_HREF}`} className="text-pa-green underline">{CONTACT_PHONE}</a>],
     ['email', <a key="e" href={`mailto:${CONTACT_EMAIL}`} className="text-pa-green underline">{CONTACT_EMAIL}</a>],

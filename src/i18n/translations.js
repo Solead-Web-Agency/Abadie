@@ -12,19 +12,23 @@ export const CONTACT_ADDRESS_LINES = ['55, rue 3.37', '01 BP 964 Ouagadougou 01'
 export const CONTACT_ADDRESS = CONTACT_ADDRESS_LINES.join(', ')
 export const CONTACT_ADDRESS_SHORT = '55, rue 3.37, Ouagadougou'
 
-const MAPS_QUERY = '55 rue 3.37, Ouagadougou, Burkina Faso'
-export const MAPS_DIRECTIONS_HREF = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAPS_QUERY)}`
-export const MAPS_SEARCH_HREF = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAPS_QUERY)}`
-export const MAPS_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&z=16&output=embed`
+// Pin supplied by the firm (Google Maps place "Cabinet Pierre Abadie").
+const MAPS_LATLNG = '12.3768246,-1.5125586'
+export const MAPS_DIRECTIONS_HREF = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_LATLNG}`
+export const MAPS_SEARCH_HREF = 'https://maps.app.goo.gl/kVsn5wc88Fp9rMDV7'
+export const MAPS_EMBED_SRC = `https://maps.google.com/maps?q=${MAPS_LATLNG}&z=17&output=embed`
 
-// Legal identification shown on the legal notice page. Fields left null are
-// not displayed — to be completed with the information supplied by the firm.
+// Legal identification shown on the legal notice page (supplied by the firm,
+// 30 Sept. 2026). Fields left null are not displayed.
 export const LEGAL = {
   name: 'Cabinet Pierre Abadie',
-  form: null,
-  rccm: null,
-  ifu: null,
-  publicationDirector: null,
+  form: {
+    fr: 'Entreprise individuelle (personne physique)',
+    en: 'Sole proprietorship (natural person)',
+  },
+  rccm: 'BF-OUA-01-2004-A10-01195',
+  ifu: '00000969 T',
+  publicationDirector: 'Pierre ABADIE',
 }
 
 export const SOCIALS = [
@@ -330,7 +334,8 @@ export const messages = {
         {
           title: 'Vos droits',
           text: [
-            "Conformément à la loi n°001-2021/AN du 30 mars 2021 portant protection des personnes à l'égard du traitement des données à caractère personnel, vous disposez d'un droit d'accès, de rectification, d'opposition et d'effacement de vos données. Pour l'exercer, écrivez-nous à l'adresse indiquée ci-dessous. Vous pouvez également saisir la Commission de l'informatique et des libertés (CIL).",
+            "Le traitement des données à caractère personnel est effectué conformément à la loi n°001-2021/AN du 30 mars 2021 portant protection des personnes à l’égard du traitement des données à caractère personnel et à son décret d’application n°2022-0514/PRES-TRANS/PM/MJDHRI/MEFP, sous le contrôle de la Commission de l’Informatique et des Libertés (CIL) du Burkina Faso.",
+            "Vous disposez d'un droit d'accès, de rectification, d'opposition et d'effacement de vos données. Pour l'exercer, écrivez-nous à l'adresse indiquée ci-dessous. Vous pouvez également saisir la CIL.",
           ],
         },
         {
@@ -705,7 +710,8 @@ export const messages = {
         {
           title: 'Your rights',
           text: [
-            'Under Law no. 001-2021/AN of 30 March 2021 on the protection of individuals with regard to the processing of personal data, you have the right to access, rectify, object to and erase your data. To exercise these rights, write to us at the address below. You may also contact the Commission de l’informatique et des libertés (CIL).',
+            'Personal data is processed in accordance with Law no. 001-2021/AN of 30 March 2021 on the protection of individuals with regard to the processing of personal data and its implementing Decree no. 2022-0514/PRES-TRANS/PM/MJDHRI/MEFP, under the supervision of the Commission de l’Informatique et des Libertés (CIL) of Burkina Faso.',
+            'You have the right to access, rectify, object to and erase your data. To exercise these rights, write to us at the address below. You may also contact the CIL.',
           ],
         },
         {
