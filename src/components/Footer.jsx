@@ -10,6 +10,7 @@ import {
   WHATSAPP_HREF,
 } from '../i18n/translations'
 import { useLang } from '../i18n/useLang'
+import { useConsent } from '../consent/useConsent'
 
 const footerNav = [
   { id: 'qui', to: '/qui-sommes-nous' },
@@ -26,6 +27,7 @@ const linkClass = 'text-gray-300 transition-colors hover:text-white hover:underl
 export default function Footer() {
   const year = new Date().getFullYear()
   const { t, withLang } = useLang()
+  const { openPanel } = useConsent()
 
   return (
     <footer className="focus-light bg-pa-ink text-gray-300">
@@ -122,7 +124,7 @@ export default function Footer() {
           <p>
             © {year} Cabinet Pierre Abadie. {t.footer.rights}
           </p>
-          <ul className="flex gap-4">
+          <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1">
             <li>
               <Link to={withLang('/mentions-legales')} className={linkClass}>
                 {t.nav.legal}
@@ -132,6 +134,11 @@ export default function Footer() {
               <Link to={withLang('/politique-de-confidentialite')} className={linkClass}>
                 {t.nav.privacy}
               </Link>
+            </li>
+            <li>
+              <button type="button" onClick={openPanel} className={linkClass}>
+                {t.consent.manage}
+              </button>
             </li>
           </ul>
         </div>

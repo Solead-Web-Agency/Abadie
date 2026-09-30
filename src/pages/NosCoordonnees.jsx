@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import PageBanner from '../components/PageBanner'
 import CTA from '../components/CTA'
 import Icon from '../components/Icon'
 import { useLang } from '../i18n/useLang'
+import { useConsent } from '../consent/useConsent'
 import { usePageMeta } from '../i18n/usePageMeta'
 import {
   CONTACT_ADDRESS_LINES,
@@ -36,7 +36,7 @@ function Card({ icon, title, children, action }) {
 export default function NosCoordonnees() {
   const { t } = useLang()
   const c = t.coord
-  const [showMap, setShowMap] = useState(false)
+  const { consent, allow } = useConsent()
   usePageMeta()
 
   const newTab = <span className="sr-only"> {t.common.newTab}</span>
@@ -125,7 +125,7 @@ export default function NosCoordonnees() {
           </ul>
 
           <div className="mt-10 overflow-hidden rounded-2xl border border-black/10 shadow-sm">
-            {showMap ? (
+            {consent.maps ? (
               <iframe
                 title={c.mapTitle}
                 className="h-96 w-full"
@@ -138,7 +138,7 @@ export default function NosCoordonnees() {
                 <Icon name="pin" className="h-10 w-10 text-pa-green" />
                 <p className="max-w-md text-sm text-pa-gray">{c.mapNotice}</p>
                 <div className="flex flex-wrap justify-center gap-3">
-                  <button type="button" onClick={() => setShowMap(true)} className={primary}>
+                  <button type="button" onClick={() => allow('maps')} className={primary}>
                     {c.showMap}
                   </button>
                   <a href={MAPS_DIRECTIONS_HREF} target="_blank" rel="noreferrer" className={secondary}>
