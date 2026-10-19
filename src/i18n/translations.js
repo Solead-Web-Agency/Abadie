@@ -135,7 +135,7 @@ export const messages = {
       founderLead: 'Le premier responsable et fondateur, Pierre ABADIE est :',
       founderTitles: ['Expert-comptable,', 'Expert-fiscal,', 'Conseil juridique,', 'Expert judiciaire,', 'Mandataire judiciaire,'],
       honor: "Il est chevalier de l'Ordre du Mérite du Burkina Faso.",
-      body: "Il réside au Burkina Faso depuis 1998 d'où il est le conseil des entreprises internationales implantées ou souhaitant s'implanter au Burkina. La direction du cabinet est assurée par Robert HIEN. Le Cabinet Pierre Abadie est une équipe pluridisciplinaire d'une vingtaine de collaborateurs expérimentés et rigoureux, avec :",
+      body: "Pierre ABADIE, fondateur du cabinet, réside au Burkina Faso depuis 1998. Il conseille les entreprises internationales implantées ou souhaitant s’implanter au Burkina Faso. La direction du cabinet est assurée par Robert HIEN. Le Cabinet Pierre Abadie est une équipe pluridisciplinaire d'une vingtaine de collaborateurs expérimentés et rigoureux, avec :",
       features: ["un département d'expertise comptable", 'un département de conseil juridique.'],
       strengths: [
         'une équipe pluridisciplinaire et multiculturelle,',
@@ -383,15 +383,10 @@ export const messages = {
         { title: 'Formation continue', text: 'Échanges permanents, supervisions croisées et montée en compétence constante.' },
         { title: 'Travaux de recherche', text: 'Une production importante, qualitative et quantitative, sur le droit et la fiscalité.' },
       ],
-      openingsTitle: 'Nos offres',
-      openings: [
-        { role: 'Collaborateur(trice) comptable', type: 'CDI · Ouagadougou' },
-        { role: 'Juriste en droit social', type: 'CDI · Ouagadougou' },
-        { role: 'Stagiaire fiscalité', type: 'Stage · Ouagadougou' },
-      ],
-      apply: 'Postuler',
-      ctaTitle: 'Candidature spontanée ?',
-      ctaText: 'Envoyez-nous votre CV et votre lettre de motivation, nous étudions toutes les candidatures.',
+      spontTitle: 'Candidature spontanée',
+      spontText:
+        'Vous souhaitez rejoindre le Cabinet Pierre Abadie ? Adressez-nous votre CV et votre lettre de motivation en précisant le domaine et le type de poste recherchés.',
+      spontCta: 'Nous écrire',
     },
     ecrire: {
       subtitle: 'Une question, un projet ? Nos experts vous répondent.',
@@ -554,7 +549,7 @@ export const messages = {
       founderLead: 'The founder and managing partner, Pierre ABADIE, is a:',
       founderTitles: ['Chartered accountant,', 'Tax expert,', 'Legal adviser,', 'Judicial expert,', 'Judicial administrator,'],
       honor: 'He is a Knight of the Order of Merit of Burkina Faso.',
-      body: 'He has lived in Burkina Faso since 1998, where he advises international companies established in, or wishing to establish in, the country. The firm is managed by Robert HIEN. Cabinet Pierre Abadie is a multidisciplinary team of around twenty experienced and rigorous professionals, with:',
+      body: 'Pierre ABADIE, the firm’s founder, has lived in Burkina Faso since 1998. He advises international companies established in, or wishing to establish in, Burkina Faso. The firm is managed by Robert HIEN. Cabinet Pierre Abadie is a multidisciplinary team of around twenty experienced and rigorous professionals, with:',
       features: ['an accounting department', 'a legal advisory department.'],
       strengths: [
         'a multidisciplinary and multicultural team,',
@@ -787,15 +782,10 @@ export const messages = {
         { title: 'Continuous training', text: 'Ongoing exchanges, cross-reviews and constant skills development.' },
         { title: 'Research work', text: 'Significant output, both qualitative and quantitative, on law and taxation.' },
       ],
-      openingsTitle: 'Our openings',
-      openings: [
-        { role: 'Accountant', type: 'Permanent · Ouagadougou' },
-        { role: 'Labour-law lawyer', type: 'Permanent · Ouagadougou' },
-        { role: 'Tax intern', type: 'Internship · Ouagadougou' },
-      ],
-      apply: 'Apply',
-      ctaTitle: 'Spontaneous application?',
-      ctaText: 'Send us your CV and cover letter — we review every application.',
+      spontTitle: 'Spontaneous application',
+      spontText:
+        'Would you like to join Cabinet Pierre Abadie? Send us your CV and cover letter, specifying the field and type of position you are looking for.',
+      spontCta: 'Contact us',
     },
     ecrire: {
       subtitle: 'A question or a project? Our experts will answer you.',

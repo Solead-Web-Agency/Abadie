@@ -238,39 +238,6 @@ const postItems = [
     },
   },
   {
-    slug: 'creation-de-societe-recourir-a-un-professionnel',
-    media: 'Cabinet Pierre Abadie',
-    date: '2022-08-03',
-    file: null,
-    title: {
-      fr: 'Pourquoi recourir à un professionnel pour la création de sa société ?',
-      en: 'Why use a professional to set up your company?',
-    },
-    summary: {
-      fr: [
-        'Les mentions des actes constitutifs ont des conséquences fiscales et pénales importantes : ce que tout créateur de société doit savoir.',
-      ],
-      en: [
-        'The wording of a company’s articles has significant tax and criminal consequences: what every company founder should know.',
-      ],
-    },
-    body: [
-      { p: 'Toutes les mentions contenues dans les actes constitutifs des sociétés ont des implications très importantes et souvent lourdes de conséquences.' },
-      { h: 'Sur le plan fiscal' },
-      { p: 'Certains avantages et obligations fiscales sont fonction de la forme juridique et du chiffre d’affaires de la société.' },
-      {
-        ul: [
-          'Exemple 1 : la contribution des patentes est fonction du chiffre d’affaires et du secteur d’activité.',
-          'Exemple 2 : le régime d’imposition est fonction du chiffre d’affaires, lequel dépend souvent de la forme juridique de la société.',
-        ],
-      },
-      { h: 'Sur le plan pénal' },
-      { p: 'Pendant la constitution de la société, certaines formalités sont nécessaires et leur absence est pénalement répréhensible.' },
-      { p: 'Exemple : pour la société anonyme, l’émission d’actions avant l’immatriculation de la société est pénalement répréhensible (article 886 de l’Acte uniforme relatif au droit des sociétés commerciales et du GIE).' },
-      { p: '« Est constitutif d’une infraction pénale, le fait, pour les fondateurs, le président-directeur général, le directeur général, l’administrateur général ou l’administrateur général adjoint d’une société anonyme d’émettre des actions avant l’immatriculation ou à n’importe quelle époque lorsque l’immatriculation est obtenue par fraude ou que la société est irrégulièrement constituée. » — Art. 886, AUDSC-GIE' },
-    ],
-  },
-  {
     slug: 'contribution-fonciere',
     media: "L'Économiste du Faso",
     date: '2022-03-28',

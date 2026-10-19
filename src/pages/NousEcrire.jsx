@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import PageBanner from '../components/PageBanner'
 import Icon from '../components/Icon'
 import { useLang } from '../i18n/useLang'
@@ -15,6 +15,8 @@ import {
 
 const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 const FIELDS = ['name', 'email', 'message']
+// Index of « Recrutement » / « Recruitment » in t.ecrire.subjects (?objet=recrutement).
+const RECRUITMENT_SUBJECT = 3
 
 export default function NousEcrire() {
   const { t, withLang } = useLang()
@@ -22,10 +24,11 @@ export default function NousEcrire() {
   usePageMeta()
   const [sent, setSent] = useState(false)
   const [errors, setErrors] = useState({})
+  const [params] = useSearchParams()
   const [form, setForm] = useState({
     name: '',
     email: '',
-    subject: tr.subjects[0],
+    subject: tr.subjects[params.get('objet') === 'recrutement' ? RECRUITMENT_SUBJECT : 0],
     message: '',
   })
   const refs = { name: useRef(null), email: useRef(null), message: useRef(null) }
