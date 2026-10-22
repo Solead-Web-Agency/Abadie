@@ -29,29 +29,27 @@ export default function NousRejoindre() {
             ))}
           </div>
 
-          <h2 className="mt-16 text-2xl font-extrabold">{t.rejoindre.openingsTitle}</h2>
-          <div className="mt-6 divide-y divide-black/5 overflow-hidden rounded-2xl border border-black/5 bg-white">
-            {t.rejoindre.openings.map((o) => (
-              <div
-                key={o.role}
-                className="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"
-              >
-                <div>
-                  <p className="font-semibold text-pa-ink">{o.role}</p>
-                  <p className="text-sm text-pa-gray">{o.type}</p>
-                </div>
-                <Link
-                  to={withLang('/nous-ecrire')}
-                  className="self-start rounded-md bg-pa-green px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-pa-green-dark sm:self-auto"
-                >
-                  {t.rejoindre.apply}
-                </Link>
-              </div>
-            ))}
-          </div>
+          <section
+            aria-labelledby="spont-title"
+            className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-pa-green/20 bg-pa-green/5 p-8 md:flex-row md:items-center md:justify-between"
+          >
+            <div className="max-w-2xl">
+              <h2 id="spont-title" className="text-2xl font-extrabold">
+                {t.rejoindre.spontTitle}
+              </h2>
+              <p className="mt-3 leading-relaxed text-pa-gray">{t.rejoindre.spontText}</p>
+            </div>
+            <Link
+              to={`${withLang('/nous-ecrire')}?objet=recrutement`}
+              className="inline-flex shrink-0 items-center gap-2 rounded-md bg-pa-green px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-pa-green-dark"
+            >
+              <Icon name="mail" className="h-4 w-4" />
+              {t.rejoindre.spontCta}
+            </Link>
+          </section>
         </div>
       </section>
-      <CTA title={t.rejoindre.ctaTitle} text={t.rejoindre.ctaText} />
+      <CTA />
     </>
   )
 }

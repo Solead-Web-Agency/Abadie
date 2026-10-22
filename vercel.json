@@ -286,6 +286,16 @@
       "source": "/en/author/:path*",
       "destination": "/en",
       "permanent": true
+    },
+    {
+      "source": "/nos-posts/creation-de-societe-recourir-a-un-professionnel",
+      "destination": "/nos-posts",
+      "permanent": true
+    },
+    {
+      "source": "/en/nos-posts/creation-de-societe-recourir-a-un-professionnel",
+      "destination": "/en/nos-posts",
+      "permanent": true
     }
   ],
   "rewrites": [
