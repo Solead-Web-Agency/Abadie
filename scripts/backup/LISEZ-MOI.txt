@@ -1,0 +1,57 @@
+SAUVEGARDE COMPLÈTE DU SITE pierreabadie.com
+Cabinet Pierre Abadie — sauvegarde générée automatiquement le {{DATE}} (UTC), après la dernière modification du site
+
+==================================================================
+CE QUE CONTIENT CETTE ARCHIVE
+==================================================================
+
+1. Dossier « site »
+   Le site complet, prêt à être remis en ligne tel quel : toutes les
+   pages en français et en anglais, les liens entre les pages, les
+   menus, les images, les logos, les visuels des ouvrages et tous les
+   documents PDF (presse et posts).
+
+2. Dossier « code-source »
+   Les fichiers d'origine du site, utilisés par un développeur web pour
+   le modifier (textes, mise en page, réglages de l'hébergement et des
+   redirections des anciennes adresses).
+
+3. Fichier « historique-complet.bundle »
+   Toutes les versions successives du site depuis sa création. Il permet
+   à un développeur de retrouver n'importe quelle version antérieure.
+
+Le site n'utilise aucune base de données : cette archive contient donc
+l'intégralité du site.
+
+==================================================================
+COMMENT REMETTRE LE SITE EN LIGNE
+==================================================================
+
+Solution 1 — La plus simple : contacter Solead (nathan@solead.fr) ou
+tout développeur web, en lui transmettant cette archive.
+
+Solution 2 — Sans aide, en quelques minutes :
+   a. Décompresser l'archive sur votre ordinateur.
+   b. Ouvrir https://app.netlify.com/drop et créer un compte gratuit.
+   c. Faire glisser le dossier « site » dans la page.
+      Le site est en ligne immédiatement sur une adresse provisoire.
+   d. Pour le rattacher à pierreabadie.com, suivre les indications de
+      Netlify (rubrique « Domain management ») puis modifier les
+      réglages DNS dans votre espace Amen.fr, en ne touchant qu'aux
+      lignes du site (A, AAAA et www) et JAMAIS à celles de la
+      messagerie (MX, TXT, mail, smtp, imap, webmail…).
+
+Solution 3 — Sur un hébergement classique (par exemple Amen) :
+   Copier le contenu du dossier « site » à la racine de l'hébergement
+   web. Le fichier .htaccess inclus assure le bon fonctionnement de
+   toutes les pages.
+
+==================================================================
+OÙ SE TROUVENT LES AUTRES COPIES
+==================================================================
+
+- GitHub : https://github.com/Solead-Web-Agency/Abadie
+  (toutes les versions, accessible avec votre compte GitHub PierreABADIE)
+- Vercel : hébergeur actuel du site, qui conserve les versions mises en
+  ligne.
+- Votre nom de domaine et votre messagerie restent chez Amen.fr.

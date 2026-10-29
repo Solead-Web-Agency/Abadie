@@ -1,0 +1,54 @@
+# Complete backup of the site to the firm's Dropbox after every change on main.
+# Setup: secrets DROPBOX_APP_KEY, DROPBOX_APP_SECRET, DROPBOX_REFRESH_TOKEN and
+# variable DROPBOX_FOLDER (Settings > Secrets and variables > Actions).
+# Until they exist the archive is still built (and kept 30 days as an artifact)
+# but not sent. On failure GitHub emails the repository admins.
+name: Sauvegarde Dropbox
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: sauvegarde-dropbox
+  cancel-in-progress: false
+
+jobs:
+  sauvegarde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history for historique-complet.bundle
+
+      - name: Branche main locale
+        run: git rev-parse --verify --quiet main >/dev/null || git branch main HEAD
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Archive complète
+        id: archive
+        run: echo "zip=$(scripts/backup/build-archive.sh "$RUNNER_TEMP")" >> "$GITHUB_OUTPUT"
+
+      - name: Envoi vers Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          DROPBOX_FOLDER: ${{ vars.DROPBOX_FOLDER }}
+          KEEP: 10
+        run: python3 scripts/backup/dropbox-upload.py "${{ steps.archive.outputs.zip }}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sauvegarde-pierreabadie
+          path: ${{ steps.archive.outputs.zip }}
+          retention-days: 30
